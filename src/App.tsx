@@ -13,6 +13,38 @@ const groups=[{name:'Desarrollo y programación',members:'128 miembros',icon:Cod
 const people=[{name:'Alex Rivera',detail:'Desarrollo web · React',initials:'AR',color:'violet'},{name:'Sofía Torres',detail:'Diseño · UX',initials:'ST',color:'pink'},{name:'Daniel Gómez',detail:'Python · Automatización',initials:'DG',color:'cyan'}];
 const nav=[['Inicio',House],['Explorar',Compass],['Grupos',Users],['Mensajes',MessageCircle],['Guardados',Bookmark],['Mi perfil',LayoutGrid]] as const;
 export default function App(){
+const [user,setUser]=useState<User|null>(null);
+const [authLoading,setAuthLoading]=useState(true);
+const [authBusy,setAuthBusy]=useState(false);
+const [authError,setAuthError]=useState('');
+const fullName=String(user?.user_metadata?.full_name||user?.user_metadata?.name||user?.user_metadata?.display_name||user?.email?.split('@')[0]||'Miembro');
+const avatarUrl=String(user?.user_metadata?.avatar_url||user?.user_metadata?.picture||'');
+const professionalProfile=String(user?.user_metadata?.professional_profile||user?.user_metadata?.professionalProfile||'');
+const initials=fullName.split(/\\s+/).filter(Boolean).slice(0,2).map(n=>n[0]?.toUpperCase()).join('')||'RC';
+const userHandle='@'+(user?.email?.split('@')[0]||'miembro');
+useEffect(()=>{
+ let alive=true;
+ supabase.auth.getSession().then(({data,error})=>{
+  if(!alive)return;
+  if(error)setAuthError('No se pudo verificar la sesión. Intenta iniciar sesión de nuevo.');
+  setUser(data.session?.user??null);
+  setAuthLoading(false);
+ });
+ const {data:{subscription}}=supabase.auth.onAuthStateChange((_event,session)=>{
+  if(alive){setUser(session?.user??null);setAuthLoading(false);}
+ });
+ return ()=>{alive=false;subscription.unsubscribe();};
+},[]);
+const signIn=async()=>{
+ setAuthBusy(true);setAuthError('');
+ const {error}=await supabase.auth.signInWithOAuth({provider:'google',options:{redirectTo:window.location.origin}});
+ if(error){setAuthError('No se pudo iniciar sesión. Inténtalo de nuevo.');setAuthBusy(false);}
+};
+const signOut=async()=>{
+ const {error}=await supabase.auth.signOut();
+ if(error)setNotice('No se pudo cerrar sesión');
+};
+
 const [tab,setTab]=useState('Inicio'),[draft,setDraft]=useState(''),[posts,setPosts]=useState<Post[]>(seed),[query,setQuery]=useState(''),[filter,setFilter]=useState('Recientes'),[editing,setEditing]=useState<number|null>(null),[editText,setEditText]=useState(''),[commentDraft,setCommentDraft]=useState<Record<number,string>>({}),[commentOpen,setCommentOpen]=useState<number|null>(null),[notice,setNotice]=useState(''),[joined,setJoined]=useState<string[]>([]),[connections,setConnections]=useState<string[]>([]),[selectedGroup,setSelectedGroup]=useState<string|null>(null);
 const notify=(s:string)=>{setNotice(s);window.setTimeout(()=>setNotice(''),2400)};
 const visible=useMemo(()=>posts.filter(p=>(p.text+' '+p.author+' '+p.handle+' '+p.tag).toLowerCase().includes(query.toLowerCase())).sort((a,b)=>filter==='Populares'?b.likes-a.likes:b.createdAt-a.createdAt),[posts,query,filter]);
