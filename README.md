@@ -1,1 +1,3 @@
-# ramoscorp-comunidad
+# RamosCorp Comunidad
+
+Prototipo social en construcción.
