@@ -20,7 +20,7 @@ const [authError,setAuthError]=useState('');
 const fullName=String(user?.user_metadata?.full_name||user?.user_metadata?.name||user?.user_metadata?.display_name||user?.email?.split('@')[0]||'Miembro');
 const avatarUrl=String(user?.user_metadata?.avatar_url||user?.user_metadata?.picture||'');
 const professionalProfile=String(user?.user_metadata?.professional_profile||user?.user_metadata?.professionalProfile||'');
-const initials=fullName.split(/\\s+/).filter(Boolean).slice(0,2).map(n=>n[0]?.toUpperCase()).join('')||'RC';
+const initials=fullName.split(/\s+/).filter(Boolean).slice(0,2).map(n=>n[0]?.toUpperCase()).join('')||'RC';
 const userHandle='@'+(user?.email?.split('@')[0]||'miembro');
 useEffect(()=>{
  let alive=true;
