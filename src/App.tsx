@@ -14,7 +14,11 @@ export default function App(){
  const user=demoUser;
  const [tab,setTab]=useState('Inicio'),[draft,setDraft]=useState(''),[tag,setTag]=useState('General'),[query,setQuery]=useState('');
  const [menuOpen,setMenuOpen]=useState(false),[menuPage,setMenuPage]=useState(''),[activeGroup,setActiveGroup]=useState(''),[chatDraft,setChatDraft]=useState(''),[chatMessages,setChatMessages]=useState<Record<string,{author:string;time:string;text:string}[]>>(groupMessages);
- const [posts,setPosts]=useState<Post[]>(starter),[joined,setJoined]=useState<string[]>([]),[showComposer,setShowComposer]=useState(false),[notice,setNotice]=useState('');
+ const [posts,setPosts]=useState<Post[]>(()=>{try{return JSON.parse(localStorage.getItem('rc_posts')||'null')||starter}catch{return starter}}),[joined,setJoined]=useState<string[]>(()=>{try{return JSON.parse(localStorage.getItem('rc_joined')||'[]')}catch{return []}}),[showComposer,setShowComposer]=useState(false),[notice,setNotice]=useState('');
+ useEffect(()=>{try{localStorage.setItem('rc_posts',JSON.stringify(posts))}catch{}},[posts]);
+ useEffect(()=>{try{localStorage.setItem('rc_joined',JSON.stringify(joined))}catch{}},[joined]);
+ useEffect(()=>{try{const saved=localStorage.getItem('rc_group_messages');if(saved)setChatMessages(JSON.parse(saved))}catch{}},[]);
+ useEffect(()=>{try{localStorage.setItem('rc_group_messages',JSON.stringify(chatMessages))}catch{}},[chatMessages]);
  const filtered=useMemo(()=>posts.filter(p=>(tab!=='Guardados'||p.saved)&&((p.text+' '+p.author+' '+p.tag).toLowerCase().includes(query.toLowerCase()))),[posts,tab,query]);
  const sendGroupMessage=()=>{if(!chatDraft.trim()||!activeGroup)return;setChatMessages(p=>({...p,[activeGroup]:[...(p[activeGroup]||[]),{author:'Miembro de la comunidad',time:'Ahora',text:chatDraft.trim()}]}));setChatDraft('')};
  const publish=()=>{if(!draft.trim())return;const name=user?.user_metadata?.full_name||user?.email||'Miembro';const handle='@'+String(name).split('@')[0].replace(/[^a-zA-Z0-9]/g,'').toLowerCase();setPosts(p=>[{id:crypto.randomUUID(),author:String(name),handle,avatar:String(name).slice(0,2).toUpperCase(),text:draft.trim(),tag,likes:0,liked:false,saved:false,comments:0,time:'Ahora'},...p]);setDraft('');setShowComposer(false);setTab('Inicio');setNotice('¡Tu publicación está lista!');setTimeout(()=>setNotice(''),2800)};
