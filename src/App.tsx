@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { House, Compass, Users, Heart, Plus, Search, Bell, MessageCircle, Image, Send, X, Sparkles, ChevronRight, Bookmark, Menu } from 'lucide-react';
+import { House, Compass, Users, Heart, Plus, Search, Bell, MessageCircle, Image, Send, X, Sparkles, ChevronRight, Bookmark, Menu, LogOut } from 'lucide-react';
 
 type Post = { id:string; author:string; handle:string; avatar:string; text:string; tag:string; likes:number; liked:boolean; saved:boolean; comments:number; time:string };
 const starter:Post[]=[
