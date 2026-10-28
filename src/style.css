@@ -140,3 +140,21 @@ button:active{transform:scale(.97)}
 .chat-list-row small{color:#a6a0ad!important}
 .chat-list-row .group-emoji{background:#211b2b!important;color:#d8c8ff!important}
 .chat-list-row>svg{color:#9d91b2!important}
+
+/* Group chat header identity and overflow actions */
+.app:has(.group-chat) .chat-head{display:flex;align-items:center;gap:12px;position:relative}
+.chat-group-avatar{width:38px;height:38px;min-width:38px;border-radius:50%;object-fit:cover;border:1px solid #ffffff18}
+.chat-group-emoji{display:grid;place-items:center;background:#282137;font-size:19px}
+.chat-head-title{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.chat-head-title b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chat-menu-wrap{position:relative;margin-left:auto;flex-shrink:0}
+.chat-menu-trigger{width:40px;height:40px;display:grid;place-items:center}
+.vertical-dots{font-size:28px;line-height:1;font-weight:700;transform:translateY(-2px);color:#d6c9ed}
+.chat-menu-dismiss{position:fixed;inset:0;z-index:20;background:transparent;border:0;padding:0}
+.chat-options-menu{position:absolute;right:0;top:calc(100% + 8px);z-index:21;width:min(260px,calc(100vw - 28px));padding:7px;background:#17141f;border:1px solid #393143;border-radius:14px;box-shadow:0 14px 38px #0008;display:flex;flex-direction:column;gap:2px}
+.chat-options-menu button{display:flex;align-items:center;gap:11px;width:100%;padding:12px 11px;border:0;border-radius:9px;background:transparent;color:#e9e4f1;text-align:left;font-size:13px}
+.chat-options-menu button:hover{background:#ffffff0b}
+.chat-options-menu button svg{color:#b9a5d8;flex-shrink:0}
+.chat-options-menu .chat-option-danger{color:#ff9b9b}
+.chat-options-menu .chat-option-danger svg{color:#ff9b9b}
+@media(max-width:600px){.chat-group-avatar{width:34px;height:34px;min-width:34px}.app:has(.group-chat) .chat-head{gap:9px}}
