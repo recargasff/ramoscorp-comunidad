@@ -178,3 +178,15 @@ button:active{transform:scale(.97)}
 /* Avatar photos */
 .avatar img,.mini-avatar img,.top-avatar img,.profile-avatar img,.settings-avatar img{width:100%;height:100%;display:block;object-fit:cover;border-radius:inherit;}
 .avatar,.mini-avatar,.top-avatar,.profile-avatar,.settings-avatar{overflow:hidden;}
+
+/* Legal, privacy and account tools open as independent full-screen sections */
+.menu-info{position:fixed;inset:12px;z-index:1000;overflow-y:auto;max-width:760px;margin:auto;padding:24px;background:#100e16;border:1px solid #403150;border-radius:18px;box-shadow:0 20px 80px #000b;}
+.menu-info>b{display:block;font-size:22px;margin:8px 0 18px;color:#f5f0ff;}
+.menu-info p,.menu-info li{font-size:14px;line-height:1.75;color:#c4bbcf;}
+.menu-info ol,.menu-info ul{padding-left:22px;}
+.menu-info small{display:block;color:#92889f;font-size:11px;line-height:1.6;margin:12px 0;}
+.menu-info .my-data-panel{display:grid;gap:12px;margin-top:18px;}
+.menu-info .my-data-panel label{font-size:12px;color:#c7b8e2;}
+.menu-info .my-data-panel select,.menu-info .my-data-panel textarea{width:100%;box-sizing:border-box;background:#1a1622;color:#f3eef9;border:1px solid #40364e;border-radius:10px;padding:12px;font:inherit;}
+.menu-info>button:last-child{margin-top:20px;padding:12px 18px;background:#a78bfa;color:#170f25;font-weight:700;}
+@media(min-width:700px){.menu-info{inset:5vh 10vw;}}
