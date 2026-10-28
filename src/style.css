@@ -3,3 +3,60 @@
 @media(max-width:1200px){.layout{grid-template-columns:minmax(0,1fr) 245px;padding:25px 22px;gap:18px}.sidebar{width:220px}.topbar,.layout{margin-left:220px}.topbar{padding:0 22px}.welcome-shape{font-size:75px}}
 @media(max-width:900px){.sidebar{width:72px;padding:22px 10px}.sidebar .brand{justify-content:center;padding:0;margin-bottom:30px}.sidebar .brand>span,.sidebar nav button:not(.active){font-size:0}.sidebar .brand>span,.sidebar nav button{font-size:0}.sidebar nav button{justify-content:center;padding:13px}.sidebar nav button svg{width:20px;height:20px}.sidebar-cta{font-size:0;padding:13px}.sidebar-cta svg{width:20px;height:20px}.sidebar-bottom{justify-content:center}.profile-mini,.sidebar-bottom .icon-btn{display:none}.topbar,.layout{margin-left:72px}.layout{grid-template-columns:minmax(0,1fr)}.rightbar{display:none}}
 @media(max-width:600px){.sidebar{display:none}.topbar{margin:0;height:62px;padding:0 14px;gap:10px}.mobile-brand{display:flex;align-items:center;gap:8px;font-size:12px}.mobile-brand .logo{font-size:19px;padding:5px 8px}.searchbox{width:auto;flex:1;padding:10px}.searchbox input{font-size:11px}.top-avatar{width:29px;height:29px}.layout{margin:0;display:block;padding:15px 12px 90px}.welcome{padding:23px 19px;min-height:145px;border-radius:15px}.welcome h1{font-size:27px}.welcome-shape{font-size:57px;padding:0}.welcome p{font-size:10px}.composer-card{padding:13px}.composer-actions{gap:2px}.composer-actions button{font-size:9px;padding:8px 5px}.composer-actions .compose-btn{padding:9px 10px}.post-card{padding:16px}.post-actions{gap:13px}.post-actions button{font-size:9px}.groups-grid{grid-template-columns:1fr}.group-card p{min-height:0}.mobile-nav{display:flex;position:fixed;z-index:6;bottom:0;left:0;right:0;justify-content:space-around;padding:9px 5px max(9px,env(safe-area-inset-bottom));background:#111019f2;border-top:1px solid #ffffff13;backdrop-filter:blur(15px)}.mobile-nav button{display:grid;justify-items:center;gap:4px;background:none;border:0;color:#817a8a;padding:3px 12px}.mobile-nav button.active{color:#c4b5fd}.mobile-nav small{font-size:9px}.login-card{padding:25px 22px}.login-card h1{font-size:35px}.login-art{height:145px}.toast{left:12px;right:12px;bottom:78px}.feed-footer{padding:20px 0}}
+
+/* RamosCorp Comunidad: app-like polish, motion and responsive visibility */
+:root{--rc-accent:#a78bfa;--rc-accent-2:#67e8f9;--rc-panel:#15121d;--rc-border:#30283e}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(ellipse at 50% -15%,#39265335,transparent 42%),#0b0a10}
+button,a,input,textarea,select{-webkit-tap-highlight-color:transparent}
+button{transition:transform .18s ease,background-color .2s ease,border-color .2s ease,color .2s ease,box-shadow .2s ease}
+button:active{transform:scale(.97)}
+.sidebar,.topbar,.mobile-nav{box-shadow:0 8px 35px #00000014}
+.brand .logo,.mobile-brand .logo{box-shadow:0 0 0 0 #a78bfa00;transition:box-shadow .25s ease,transform .25s ease}
+.brand:hover .logo,.mobile-brand:hover .logo{transform:rotate(-5deg) scale(1.04);box-shadow:0 0 24px #a78bfa28}
+.sidebar nav button{position:relative;overflow:hidden}
+.sidebar nav button.active{box-shadow:inset 3px 0 0 var(--rc-accent)}
+.sidebar nav button:hover{background:#241c30;color:#eee5ff;transform:translateX(2px)}
+.sidebar-cta,.compose-btn{box-shadow:0 7px 22px #a78bfa20}
+.sidebar-cta:hover,.compose-btn:hover:not(:disabled){background:#c4b5fd;box-shadow:0 9px 30px #a78bfa38;transform:translateY(-1px)}
+.searchbox:focus-within{border-color:#8b70d0;box-shadow:0 0 0 3px #a78bfa18}
+.searchbox input:focus{outline:0}
+.welcome{animation:rc-rise .55s cubic-bezier(.2,.7,.2,1) both}
+.welcome-shape{animation:rc-float 7s ease-in-out infinite;user-select:none}
+.composer-card,.compose-expanded,.post-card,.side-card,.group-card,.side-note{transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.composer-card:hover,.post-card:hover,.group-card:hover,.side-card:hover{border-color:#413452;box-shadow:0 12px 35px #00000020}
+.post-card{animation:rc-rise .42s cubic-bezier(.2,.7,.2,1) both}
+.post-card:nth-of-type(2){animation-delay:.04s}.post-card:nth-of-type(3){animation-delay:.08s}.post-card:nth-of-type(4){animation-delay:.12s}.post-card:nth-of-type(5){animation-delay:.16s}
+.post-actions button:hover{color:#e9ddff;background:#ffffff08;border-radius:8px}
+.post-actions button.liked{animation:rc-pop .28s ease}
+.avatar,.mini-avatar,.top-avatar{transition:transform .2s ease,box-shadow .2s ease}
+.avatar:hover,.mini-avatar:hover,.top-avatar:hover{transform:scale(1.06);box-shadow:0 0 0 3px #a78bfa20}
+.composer-placeholder:hover{border-color:#57446f;background:#15111e;color:#d4c5f5}
+.compose-expanded{animation:rc-expand .24s ease both}
+.compose-expanded textarea:focus{border-color:#8b70d0;box-shadow:0 0 0 3px #a78bfa15}
+.group-card:hover{transform:translateY(-3px)}
+.group-emoji{transition:transform .25s ease}
+.group-card:hover .group-emoji{transform:rotate(-5deg) scale(1.08)}
+.outline-btn:hover,.joined:hover{background:#2b2139}
+.mini-group:hover{background:#ffffff06}
+.mini-group>span{transition:transform .2s ease}.mini-group:hover>span{transform:scale(1.07)}
+.toast{animation:rc-toast .25s ease both}
+.empty{animation:rc-rise .35s ease both}
+@keyframes rc-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes rc-expand{from{opacity:0;transform:translateY(-6px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes rc-pop{0%{transform:scale(1)}45%{transform:scale(1.18)}100%{transform:scale(1)}}
+@keyframes rc-float{0%,100%{transform:rotate(-15deg) translateY(0)}50%{transform:rotate(-8deg) translateY(-7px)}}
+@keyframes rc-toast{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){
+ .topbar{padding-top:env(safe-area-inset-top);height:calc(62px + env(safe-area-inset-top))}
+ .layout{padding-top:12px}
+ .mobile-nav{padding-top:10px;min-height:58px}
+ .mobile-nav button{min-width:58px;min-height:42px}
+ .mobile-nav button:active{transform:scale(.94)}
+ .welcome{animation-duration:.4s}
+ .post-card{margin-bottom:12px}
+ .post-actions button{min-height:34px}
+ .composer-placeholder{min-height:42px}
+}
+@media(min-width:1500px){.layout{padding-left:48px;padding-right:48px;gap:32px}.rightbar{width:300px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
