@@ -158,3 +158,19 @@ button:active{transform:scale(.97)}
 .chat-options-menu .chat-option-danger{color:#ff9b9b}
 .chat-options-menu .chat-option-danger svg{color:#ff9b9b}
 @media(max-width:600px){.chat-group-avatar{width:34px;height:34px;min-width:34px}.app:has(.group-chat) .chat-head{gap:9px}}
+
+
+/* Profile settings: compact avatar and themed file controls */
+.profile-avatar,.settings-avatar{overflow:hidden;flex-shrink:0}
+.profile-avatar img,.settings-avatar img{display:block;width:100%;height:100%;max-width:100%;max-height:100%;object-fit:cover;aspect-ratio:1;border-radius:inherit}
+.profile-settings{display:grid;gap:10px;max-width:520px;margin:24px 0}
+.profile-settings .settings-avatar{width:88px;height:88px;display:grid;place-items:center;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,#8b5cf6,#312e81);font-size:28px;font-weight:800;color:#fff}
+.profile-settings label{display:block;margin-top:8px;color:#ded7eb;font-size:13px;font-weight:650}
+.profile-settings input[type="text"],.profile-settings input:not([type]),.profile-settings input[type="file"]{width:100%;min-width:0;box-sizing:border-box;border:1px solid #393143;border-radius:12px;background:#15121d;color:#eee9f6;padding:12px 14px;font:inherit;outline:none}
+.profile-settings input[type="file"]{font-size:12px;color:#bdb3cc;cursor:pointer}
+.profile-settings input[type="file"]::file-selector-button{margin:-5px 12px -5px -7px;padding:9px 12px;border:1px solid #514064;border-radius:8px;background:#292039;color:#e9ddff;font:inherit;font-weight:650;cursor:pointer;transition:background .15s ease}
+.profile-settings input[type="file"]::file-selector-button:hover{background:#382b4e}
+.profile-settings input:focus{border-color:#9874d2;box-shadow:0 0 0 3px #a78bfa18}
+.profile-settings small{color:#9890a5;font-size:11px;line-height:1.5}
+.profile-settings .compose-btn{justify-self:start;margin-top:8px}
+.profile-settings .compose-btn:disabled{opacity:.45;cursor:not-allowed}
