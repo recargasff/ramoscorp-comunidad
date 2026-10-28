@@ -24,10 +24,16 @@ const initials=fullName.split(/\s+/).filter(Boolean).slice(0,2).map(n=>n[0]?.toU
 const userHandle='@'+(user?.email?.split('@')[0]||'miembro');
 useEffect(()=>{
  let alive=true;
+ const finishLoading=()=>{if(alive)setAuthLoading(false);};
  supabase.auth.getSession().then(({data,error})=>{
   if(!alive)return;
   if(error)setAuthError('No se pudo verificar la sesión. Intenta iniciar sesión de nuevo.');
   setUser(data.session?.user??null);
+  setAuthLoading(false);
+ }).catch(()=>{
+  if(!alive)return;
+  setAuthError('No se pudo verificar la sesión. Puedes intentar iniciar sesión.');
+  setUser(null);
   setAuthLoading(false);
  });
  const {data:{subscription}}=supabase.auth.onAuthStateChange((_event,session)=>{
