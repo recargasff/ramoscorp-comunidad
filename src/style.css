@@ -202,3 +202,13 @@ button:active{transform:scale(.97)}
 .post-content-image{display:block;max-width:100%;max-height:560px;object-fit:contain;border-radius:12px;margin:12px 0;}
 .post-poll-options{display:grid;gap:8px;margin:12px 0;}
 .post-poll-options button{width:100%;text-align:left;border:1px solid #514461;background:#211a2d;color:#e7ddf5;padding:12px;border-radius:10px;}
+
+
+/* Reportes y avisos: claridad y accesibilidad */
+.menu-info .my-data-panel{gap:14px;padding:16px;border:1px solid #342c43;border-radius:16px;background:linear-gradient(145deg,#171320,#120f18);}
+.menu-info .my-data-panel label{font-weight:650;letter-spacing:.01em;color:#d8c8f7;}
+.menu-info .my-data-panel select:focus-visible,.menu-info .my-data-panel textarea:focus-visible{outline:2px solid #a78bfa;outline-offset:2px;}
+.menu-info .my-data-panel button:disabled{opacity:.55;cursor:not-allowed;}
+.menu-info .my-data-panel button:not(:disabled){transition:transform .16s ease,filter .16s ease;}
+.menu-info .my-data-panel button:not(:disabled):hover{filter:brightness(1.08);transform:translateY(-1px);}
+@media(prefers-reduced-motion:reduce){.menu-info .my-data-panel button{transition:none;}}
