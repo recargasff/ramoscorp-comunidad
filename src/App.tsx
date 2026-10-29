@@ -181,9 +181,9 @@ export default function App(){
   $('lb').addEventListener('click',login);$('pw').addEventListener('keydown',e=>{if((e as KeyboardEvent).key==='Enter')login();});$('rc').addEventListener('click',loginWithGoogle);
   window.addEventListener('hashchange',render);
   const onAuth=async()=>{const {data}=await supabase.auth.getSession();session=data.session;user=session?.user||null;if(!user){$('login').hidden=false;return;}$('login').hidden=true;intro();await loadAll();};
-  let sub:any;supabase.auth.onAuthStateChange((_e,s)=>{session=s;user=s?.user||null;if(!user){$('login').hidden=false;return;} $('login').hidden=true;window.setTimeout(()=>loadAll(),0);});
+  const {data:{subscription}}=supabase.auth.onAuthStateChange((_e,s)=>{session=s;user=s?.user||null;if(!user){$('login').hidden=false;return;} $('login').hidden=true;window.setTimeout(()=>loadAll(),0);});
   onAuth();
-  return ()=>{cleanup();sub?.unsubscribe?.();};
+  return ()=>{cleanup();subscription.unsubscribe();};
  },[]);
  return <div ref={host}/>;
 }
