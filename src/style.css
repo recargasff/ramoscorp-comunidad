@@ -197,3 +197,39 @@ nav.bar .new{background:var(--accent);color:var(--on-accent);border-radius:50%;w
  .mobile-nav button.active{color:var(--text)}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* Comunidad.html layout adapter: keep the real React/Supabase views, replace the old desktop shell */
+.app{max-width:600px!important;min-height:100vh;margin:0 auto!important;padding:0 0 76px!important;border-inline:1px solid var(--line)!important;background:var(--bg)!important;display:block!important}
+.sidebar,.rightbar{display:none!important}
+.topbar{position:sticky!important;top:0!important;z-index:30!important;display:flex!important;gap:10px!important;align-items:center!important;padding:10px 16px!important;background:var(--bg)!important;border-bottom:1px solid var(--line)!important;box-shadow:none!important}
+.mobile-brand{display:flex!important;align-items:center!important;gap:8px!important;font-size:18px!important;color:var(--text)!important}
+.mobile-brand .logo{font-size:24px!important}
+.searchbox{flex:1!important;min-width:0!important;background:var(--chip)!important;border:0!important;border-radius:999px!important;padding:9px 13px!important}
+.searchbox input{min-width:0!important;background:transparent!important}
+.top-avatar,.hamburger{display:none!important}
+.layout{display:block!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important}
+.feed{width:100%!important;max-width:none!important;min-width:0!important;margin:0!important;padding:0!important}
+.welcome{padding:17px 16px!important;border:0!important;border-bottom:1px solid var(--line)!important;border-radius:0!important;background:var(--bg)!important;box-shadow:none!important;min-height:0!important}
+.welcome h1{font-size:22px!important;line-height:1.25!important;letter-spacing:-.02em!important}
+.welcome p{font-size:14px!important;color:var(--muted)!important}
+.welcome-shape{display:none!important}
+.feed-heading,.groups-toolbar{padding:14px 16px!important}
+.post-card,.group-card,.standalone-page,.compose-expanded,.news-card{border-radius:0!important;border:0!important;border-bottom:1px solid var(--line)!important;box-shadow:none!important;background:var(--bg)!important}
+.post-card{padding:14px 16px!important}
+.post-head{gap:12px!important}
+.post-text{font-size:15px!important;line-height:1.45!important}
+.post-actions{border:0!important}
+.mobile-nav{position:fixed!important;left:50%!important;transform:translateX(-50%)!important;bottom:0!important;width:min(100%,600px)!important;z-index:40!important;display:flex!important;justify-content:space-around!important;gap:0!important;padding:8px 4px calc(8px + env(safe-area-inset-bottom,0px))!important;background:var(--bg)!important;border-top:1px solid var(--line)!important;box-shadow:none!important}
+.mobile-nav button{flex:1!important;min-width:0!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important;color:var(--muted)!important;font-size:11px!important}
+.mobile-nav button.active{color:var(--accent)!important}
+.mobile-nav button small{font-size:10px!important}
+.standalone-page{padding:16px!important}
+.standalone-page h2,.groups-toolbar h2{font-size:21px!important;letter-spacing:-.02em!important}
+.groups-grid{display:block!important}
+.group-card{padding:16px!important}
+.group-emoji,.group-cover{border-radius:12px!important}
+.group-chat{border:0!important;border-radius:0!important}
+.notification-panel{position:fixed!important;top:60px!important;left:50%!important;transform:translateX(-50%)!important;width:min(calc(100vw - 20px),560px)!important;z-index:45!important}
+#login{background:var(--bg)!important}
+.lw{max-width:380px!important}
+@media(min-width:700px){.app{border-inline:1px solid var(--line)!important}.mobile-nav{border-inline:1px solid var(--line)!important}}
