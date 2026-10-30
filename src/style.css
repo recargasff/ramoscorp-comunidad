@@ -152,7 +152,7 @@ input[type="file"]::-webkit-file-upload-button{background:var(--accent);color:va
 .comp select{font-size:12px;padding:5px 10px}
 .comp .pub{font-size:12px;padding:6px 14px}
 .groupList{padding:8px;display:grid;gap:10px}
-.groupCard{border:1px solid var(--line);border-radius:18px;padding:14px;background:var(--chip));animation:groupIn .35s cubic-bezier(.2,.8,.2,1) both}
+.groupCard{border:1px solid var(--line);border-radius:18px;padding:14px;background:var(--chip);animation:groupIn .35s cubic-bezier(.2,.8,.2,1) both}
 .groupCardHead{display:flex;gap:12px;align-items:flex-start}
 .groupEmoji{width:44px;height:44px;display:grid;place-items:center;background:var(--chip);border-radius:14px;font-size:24px;flex:none}
 .groupScore{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:8px}
