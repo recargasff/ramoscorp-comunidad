@@ -290,7 +290,7 @@ export default function App(){
   $('lo').addEventListener('click',()=>supabase.auth.signOut());$('swa').addEventListener('click',()=>supabase.auth.signOut());
   $('bk').addEventListener('click',()=>{location.hash=location.hash.startsWith('#p-')?'':'#grupos';});
   $('back').addEventListener('click',closeSheet);$('cancel').addEventListener('click',closeSheet);$('send').addEventListener('click',submitReport);
-  root.querySelectorAll<HTMLInputElement>('input[name="r"]').forEach(r=>r.addEventListener('change',()=>{($('send') as HTMLButtonElement).disabled=false;})));
+  root.querySelectorAll<HTMLInputElement>('input[name="r"]').forEach(r=>r.addEventListener('change',()=>{($('send') as HTMLButtonElement).disabled=false;}));
   $('lb').addEventListener('click',login);$('pw').addEventListener('keydown',e=>{if((e as KeyboardEvent).key==='Enter')login();});$('rc').addEventListener('click',loginWithGoogle);
   window.addEventListener('hashchange',render);
   const onAuth=async()=>{const {data}=await supabase.auth.getSession();session=data.session;user=session?.user||null;if(!user){$('login').hidden=false;return;}$('login').hidden=true;intro();await loadAll();};
