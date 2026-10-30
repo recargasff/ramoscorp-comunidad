@@ -2,18 +2,40 @@ import {useEffect,useRef} from 'react';
 import {supabase} from './lib/supabase';
 
 const html = `
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+<symbol id="users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.8a3.5 3.5 0 0 1 0 6.4M18 14.3c2.2.6 3.5 2.6 3.5 5.7"/></symbol>
+<symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/></symbol>
+<symbol id="user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></symbol>
+<symbol id="chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+<symbol id="heart" viewBox="0 0 24 24"><path d="M12 20s-8-4.9-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 6.1-8 11-8 11z"/></symbol>
+<symbol id="share" viewBox="0 0 24 24"><path d="M12 3v12M7 8l5-5 5 5M5 14v6h14v-6"/></symbol>
+<symbol id="more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/></symbol>
+<symbol id="image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-8 8"/></symbol>
+<symbol id="link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+<symbol id="code" viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></symbol>
+<symbol id="search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></symbol>
+<symbol id="mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+<symbol id="smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 14a4 4 0 0 0 7 0M9 9.5h.01M15 9.5h.01"/></symbol>
+<symbol id="mark" viewBox="0 0 24 24"><path d="M6 4h12v17l-6-4-6 4z"/></symbol>
+<symbol id="menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+<symbol id="back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+</defs></svg>
+
 <div class="app">
   <header>
     <div class="top">
       <button id="mn" aria-label="Abrir menú"><svg class="i"><use href="#menu"/></svg></button>
       <button id="bk" aria-label="Volver" hidden><svg class="i"><use href="#back"/></svg></button>
       <span class="brand" id="ttl">Comunidad</span>
+      <a class="ib" href="#buscar" aria-label="Buscar"><svg class="i"><use href="#search"/></svg></a><a class="ib" href="#mensajes" aria-label="Mensajes directos"><svg class="i"><use href="#mail"/></svg></a>
       <a class="av" id="topav" href="#perfil" aria-label="Tu perfil">T</a>
     </div>
     <div class="tabs" id="tabs" role="tablist">
       <button role="tab" aria-selected="true" data-tab="all">Para ti</button>
+      <button role="tab" aria-selected="false" data-tab="new">Recientes</button>
       <button role="tab" aria-selected="false" data-tab="mine">Mis grupos</button>
-      <button role="tab" aria-selected="false" data-tab="stories">Historias</button>
     </div>
     <div id="tools" hidden>
       <input id="q" type="search" placeholder="Buscar grupos" aria-label="Buscar grupos">
@@ -42,21 +64,24 @@ const html = `
     <div id="view" hidden></div>
   </main>
 </div>
+
+<aside class="rp" id="rp"></aside>
 <nav class="bar"><div>
   <a href="#" data-n="f" aria-label="Inicio"><svg class="i"><use href="#home"/></svg></a>
   <a href="#grupos" data-n="g" aria-label="Grupos"><svg class="i"><use href="#users"/></svg></a>
-  <a href="#personas" data-n="ch" aria-label="Chats"><svg class="i"><use href="#chat"/></svg></a>
   <button class="new" id="new" aria-label="Crear publicación"><svg class="i"><use href="#plus"/></svg></button>
-  <a href="#historias" data-n="s" aria-label="Historias"><svg class="i"><use href="#image"/></svg></a>
+  <a href="#avisos" data-n="n" aria-label="Avisos"><svg class="i"><use href="#bell"/></svg></a>
   <a href="#perfil" data-n="u" aria-label="Perfil"><svg class="i"><use href="#user"/></svg></a>
 </div></nav>
+
 <div class="back" id="dback" hidden></div>
 <aside class="drawer" id="drawer" aria-label="Menú">
   <div class="dh"><span class="av" id="dav">T</span><div><b id="dn">Tú</b><span class="d" id="de"></span></div></div>
   <div class="dl">
     <a href="#reportes">Reportes realizados</a><a href="#admin" id="adminLink" hidden>Panel de administración</a>
     <a href="#feedback">Feedback enviado</a>
-    <a href="#personas">Personas y chats</a><a href="#configuracion">Configuración</a><a href="#invitacion">Mi número / invitar</a><a href="#privacidad">Privacidad y seguridad</a><a href="https://ramoscorptech.online" target="_blank" rel="noopener noreferrer">Ir a RamosCorpTech</a>
+    <a href="#invitacion">Código de invitación</a>
+    <div class="th"><span>Tema</span><div><button data-th="auto">Auto</button><button data-th="light">Claro</button><button data-th="dark">Oscuro</button></div></div>
     <button id="swa">Cambiar de cuenta</button>
     <button class="danger" id="lo">Cerrar sesión</button>
   </div>
@@ -79,12 +104,13 @@ const html = `
 <div class="sheet" id="sheet" role="dialog" aria-label="Reportar publicación" hidden>
   <h2>Reportar publicación</h2>
   <label><input type="radio" name="r" value="spam"> Es spam</label>
-  <label><input type="radio" name="r" value="harassment"> Contenido ofensivo</label>
-  <label><input type="radio" name="r" value="other"> Información falsa</label>
-  <label><input type="radio" name="r" value="other"> Problema técnico</label>
+  <label><input type="radio" name="r" value="ofensivo"> Contenido ofensivo</label>
+  <label><input type="radio" name="r" value="falso"> Información falsa</label>
+  <label><input type="radio" name="r" value="tecnico"> Problema técnico</label>
   <div class="btns"><button id="cancel">Cancelar</button><button class="go" id="send" disabled>Enviar reporte</button></div>
 </div>
 <div id="toast" role="status" hidden></div>
+
 `;
 
 const icons = `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
