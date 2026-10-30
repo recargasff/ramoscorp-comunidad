@@ -133,3 +133,8 @@ nav.bar .new{background:var(--accent);color:var(--on-accent);border-radius:50%;w
 .btns .go{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
 .btns .go:disabled{opacity:.4}
 #toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(72px + env(safe-area-inset-bottom,0px));background:var(--text);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:14px;z-index:40}
+
+/* Accesible, visible file picker button using the existing community accent. */
+input[type="file"]{color:var(--text);max-width:100%}
+input[type="file"]::file-selector-button{background:var(--accent);color:var(--on-accent);border:0;border-radius:999px;padding:8px 14px;margin-inline-end:10px;font:inherit;font-weight:700;cursor:pointer}
+input[type="file"]::-webkit-file-upload-button{background:var(--accent);color:var(--on-accent);border:0;border-radius:999px;padding:8px 14px;margin-inline-end:10px;font:inherit;font-weight:700;cursor:pointer}
