@@ -1,0 +1,63 @@
+/* Visual refresh inspired by the user-provided comunidad-1.html.
+   Kept separate from App.tsx so application logic and Supabase integration stay intact. */
+:root{
+  --bg:#fff;
+  --text:#10141b;
+  --muted:#667085;
+  --line:#e5e7eb;
+  --accent:#4650d8;
+  --on-accent:#fff;
+  --chip:#eef0f6;
+  --hover:#f6f7fb;
+}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#09090d;--text:#eceef4;--muted:#8b90a0;--line:#23242f;
+    --accent:#8d99ff;--on-accent:#09090d;--chip:#1b1c27;--hover:#10111a;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#09090d;--text:#eceef4;--muted:#8b90a0;--line:#23242f;
+  --accent:#8d99ff;--on-accent:#09090d;--chip:#1b1c27;--hover:#10111a;
+}
+:root[data-theme="light"]{
+  --bg:#fff;--text:#10141b;--muted:#667085;--line:#e5e7eb;
+  --accent:#4650d8;--on-accent:#fff;--chip:#eef0f6;--hover:#f6f7fb;
+}
+body{background:var(--bg);color:var(--text)}
+.app{max-width:600px;border-color:var(--line);background:var(--bg)}
+header{background:var(--bg);border-color:var(--line);backdrop-filter:saturate(1.2) blur(12px)}
+.brand{font-size:19px;font-weight:800;letter-spacing:-.025em}
+.tabs button{color:var(--muted);font-weight:650;transition:color .18s ease}
+.tabs button[aria-selected="true"]{color:var(--text)}
+.tabs button[aria-selected="true"]::after{background:var(--accent);height:3px;border-radius:3px}
+.av{background:var(--chip);color:var(--text)}
+.comp{border-color:var(--line)}
+.comp textarea{color:var(--text)}
+.comp textarea::placeholder{color:var(--muted)}
+.pub{background:var(--accent);color:var(--on-accent);border-radius:999px;font-weight:700}
+.post,.row,.msg,.gh{border-color:var(--line)}
+.post:hover,.row:hover,.nt:hover{background:var(--hover)}
+.tag{background:var(--chip);color:var(--accent)}
+.join{border-color:var(--text);color:var(--text);border-radius:999px}
+nav.bar{background:var(--bg);border-color:var(--line);backdrop-filter:saturate(1.2) blur(12px)}
+nav.bar button,nav.bar a{color:var(--muted);transition:color .18s ease,background .18s ease}
+nav.bar [aria-current="page"]{color:var(--accent)}
+nav.bar .new{background:var(--accent);color:var(--on-accent);box-shadow:0 4px 14px color-mix(in srgb,var(--accent) 24%,transparent)}
+#login{background:var(--bg)}
+.lw h1{color:var(--text)}
+.fl input,.fl textarea,.mc textarea{color:var(--text);border-color:var(--line);background:var(--bg)}
+.drawer,.sheet{background:var(--bg);color:var(--text);border-color:var(--line)}
+#toast{background:var(--text);color:var(--bg)}
+:focus-visible{outline-color:var(--accent)}
+@media(min-width:768px){
+  body{padding-left:72px}
+  nav.bar{top:0;right:auto;width:72px;border-top:0;border-right:1px solid var(--line);padding:calc(14px + env(safe-area-inset-top,0px)) 0 0}
+  nav.bar div{flex-direction:column;justify-content:flex-start;height:auto;gap:6px;align-items:center}
+  nav.bar button,nav.bar a{border-radius:14px;padding:12px}
+  nav.bar .new{margin:8px 0}
+  .app{padding-bottom:24px}
+}
+@media(prefers-reduced-motion:reduce){
+  .tabs button,nav.bar button,nav.bar a{transition:none}
+}
