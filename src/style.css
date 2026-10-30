@@ -296,3 +296,76 @@ nav.bar a[data-n="ch"][aria-current="page"]{color:var(--accent)}
 .preview-dot{width:9px;height:9px;border-radius:50%;background:var(--accent);margin-top:5px;flex:none}
 :root[data-theme="dark"] .home-welcome{background:linear-gradient(120deg,#1b3029,#101613)}
 @media(max-width:420px){.home-welcome{padding:20px 14px 17px}#feed{padding-inline:8px}.dm-bubble{max-width:88%}.dm-thread{padding-inline:9px}}
+
+/* UI update from the supplied community interface: selected conversations occupy the full screen.
+   All app, Supabase, authentication and message logic remains in src/App.tsx unchanged. */
+body:has(.dm-header),
+body:has(#view .mc){
+  overflow:hidden;
+}
+body:has(.dm-header) .app,
+body:has(#view .mc) .app{
+  width:100%;
+  max-width:none;
+  height:100dvh;
+  min-height:0;
+  margin:0;
+  padding:0;
+  border:0;
+  display:flex;
+  flex-direction:column;
+}
+body:has(.dm-header) .app>header,
+body:has(#view .mc) .app>header,
+body:has(.dm-header) nav.bar,
+body:has(#view .mc) nav.bar{
+  display:none!important;
+}
+body:has(.dm-header) .app>main,
+body:has(#view .mc) .app>main{
+  flex:1;
+  min-height:0;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+body:has(.dm-header) #view,
+body:has(#view .mc) #view{
+  flex:1;
+  min-height:0;
+  max-height:none;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+body:has(.dm-header) #view .dm-header{
+  position:relative;
+  flex:none;
+  padding-top:calc(12px + env(safe-area-inset-top,0px));
+}
+body:has(.dm-header) #view .dm-thread{
+  flex:1;
+  min-height:0;
+  max-height:none;
+  height:auto;
+  overscroll-behavior:contain;
+}
+body:has(.dm-header) #view .dm-composer,
+body:has(#view .mc){
+  flex:none;
+  position:relative;
+  bottom:auto;
+  padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));
+}
+body:has(#view .mc) #view .gh{
+  flex:none;
+}
+body:has(#view .mc) #view .dm-row{
+  flex:none;
+}
+@media(min-width:601px){
+  body:has(.dm-header) .app,
+  body:has(#view .mc) .app{
+    padding-left:0;
+  }
+}
