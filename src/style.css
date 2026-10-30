@@ -138,3 +138,40 @@ nav.bar .new{background:var(--accent);color:var(--on-accent);border-radius:50%;w
 input[type="file"]{color:var(--text);max-width:100%}
 input[type="file"]::file-selector-button{background:var(--accent);color:var(--on-accent);border:0;border-radius:999px;padding:8px 14px;margin-inline-end:10px;font:inherit;font-weight:700;cursor:pointer}
 input[type="file"]::-webkit-file-upload-button{background:var(--accent);color:var(--on-accent);border:0;border-radius:999px;padding:8px 14px;margin-inline-end:10px;font:inherit;font-weight:700;cursor:pointer}
+
+/* Phase 1: compact, animated community navigation and group discovery */
+.top{padding:8px 14px;min-height:48px}.brand{font-size:17px}
+.tabs button{padding:9px 0;font-size:13px;transition:color .2s}
+.tabs button::after{transition:width .22s,transform .22s}
+.comp{padding:9px 12px;gap:9px;align-items:flex-start}
+.comp>.av{width:32px;height:32px;font-size:12px;margin-top:2px}
+.comp textarea{font-size:14px;min-height:34px;max-height:110px}
+.comp .tools{margin:3px 0;gap:2px}
+.comp .tools button,.comp .tools label{width:30px;height:30px}
+.comp .tools .i{width:18px;height:18px}
+.comp select{font-size:12px;padding:5px 10px}
+.comp .pub{font-size:12px;padding:6px 14px}
+.groupList{padding:8px;display:grid;gap:10px}
+.groupCard{border:1px solid var(--line);border-radius:18px;padding:14px;background:color-mix(in srgb,var(--bg) 92%,var(--accent) 8%));animation:groupIn .35s cubic-bezier(.2,.8,.2,1) both}
+.groupCardHead{display:flex;gap:12px;align-items:flex-start}
+.groupEmoji{width:44px;height:44px;display:grid;place-items:center;background:var(--chip);border-radius:14px;font-size:24px;flex:none}
+.groupScore{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:8px}
+.groupScore .stars{color:#f4b740;letter-spacing:1px}
+.groupScore b{font-size:13px}
+.groupScore small{color:var(--muted);font-size:11px}
+.groupCardActions{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+.rateGroup{display:flex;gap:1px}
+.rateGroup button{font-size:22px;line-height:1;color:var(--muted);padding:2px;transition:transform .15s,color .15s}
+.rateGroup button:hover{transform:scale(1.18);color:#f4b740}
+.rateGroup button.selected{color:#f4b740}
+#createGroupTab{display:block;margin:10px 0 0;width:100%;font-size:13px;padding:8px}
+.createGroup{padding:18px 16px}
+.createIntro h2{font-size:22px;margin:8px 0 4px;letter-spacing:-.03em}
+.createIntro p{color:var(--muted);margin:0 0 18px}
+#createGroupForm{border:1px solid var(--line);border-radius:18px;padding:14px}
+#createGroupForm select{display:block;width:100%;margin-top:4px;border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:10px;color:var(--text)}
+#createGroupForm .wide{margin-top:6px}
+#chips button{transition:background .2s,color .2s,transform .2s}
+#chips button:active{transform:scale(.96)}
+@keyframes groupIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.groupCard{animation:none}.tabs button,.tabs button::after,#chips button,.rateGroup button{transition:none}}
