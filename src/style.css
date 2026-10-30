@@ -230,3 +230,69 @@ input[type="file"]::-webkit-file-upload-button{background:var(--accent);color:va
 .rc-level-foot{display:flex;flex-wrap:wrap;gap:5px 12px;margin-top:10px;font-size:11px;color:var(--muted)}
 .pub{font-weight:650}
 @media(prefers-reduced-motion:reduce){.rc-progress span{transition:none}}
+
+/* Separate redesign branch: community feed, conversations and user theme settings. */
+.home-welcome{padding:24px 18px 20px;background:linear-gradient(120deg,color-mix(in srgb,var(--accent) 13%,var(--bg)),var(--bg));border-bottom:1px solid var(--line)}
+.home-welcome-brand{font-size:12px;letter-spacing:.11em;text-transform:uppercase;font-weight:800;color:var(--accent)}
+.home-welcome h1{font-size:clamp(22px,6vw,30px);line-height:1.15;letter-spacing:-.04em;margin:8px 0}
+.home-welcome p{margin:0;color:var(--muted);font-size:14px}
+#vFeed .comp{margin:12px;border:1px solid var(--line);border-radius:16px;background:var(--bg)}
+#feed{padding:0 10px 12px;display:grid;gap:12px}
+#feed .post{border:1px solid var(--line);border-radius:16px;background:var(--bg);padding:14px;box-shadow:0 2px 10px color-mix(in srgb,var(--text) 5%,transparent)}
+#feed .post .meta{gap:3px 6px}
+#feed .post p{line-height:1.55;margin:9px 0}
+#feed .acts{max-width:none;border-top:1px solid var(--line);padding-top:8px;margin-top:10px}
+nav.bar a[data-n="ch"]{color:var(--muted)}
+nav.bar a[data-n="ch"][aria-current="page"]{color:var(--accent)}
+/* WhatsApp-inspired chat layout, using Ramoscorp's existing accent. */
+.dm-header{display:flex;align-items:center;gap:11px;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--bg);position:sticky;top:0;z-index:3}
+.dm-back{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;color:var(--muted)}
+.dm-back:hover{background:var(--chip)}
+.dm-contact{display:grid;gap:2px;min-width:0}
+.dm-contact b{font-size:15px}
+.dm-contact small{font-size:12px;color:var(--muted)}
+.dm-thread{min-height:calc(100dvh - 184px);max-height:calc(100dvh - 184px);overflow-y:auto;padding:16px 12px 22px;display:flex;flex-direction:column;gap:9px;background:color-mix(in srgb,var(--chip) 42%,var(--bg))}
+.dm-row{display:flex;width:100%}
+.dm-row.sent{justify-content:flex-end}
+.dm-row.received{justify-content:flex-start}
+.dm-bubble{max-width:min(82%,440px);padding:9px 12px 6px;border-radius:15px;overflow-wrap:anywhere;box-shadow:0 1px 1px rgba(0,0,0,.06)}
+.dm-row.sent .dm-bubble{background:#a80f3b;color:#fff;border-bottom-right-radius:4px}
+.dm-row.received .dm-bubble{background:#25272b;color:#f7f7f8;border-bottom-left-radius:4px}
+.dm-bubble p{margin:0;white-space:pre-wrap;line-height:1.45}
+.dm-bubble b{display:block;font-size:12px;margin-bottom:4px;color:#b8d5c8}
+.dm-bubble time{display:block;text-align:right;font-size:10px;opacity:.72;margin-top:4px}
+.dm-empty{align-self:center;color:var(--muted);font-size:13px;padding:12px;text-align:center}
+.dm-composer{position:sticky;bottom:0;display:flex;align-items:flex-end;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:var(--bg);border-top:1px solid var(--line)}
+.dm-composer textarea{flex:1;min-width:0;max-height:120px;resize:vertical;border:1px solid var(--line);border-radius:22px;padding:11px 15px;background:var(--chip);color:var(--text);outline:none}
+.dm-send{width:42px;height:42px;flex:none;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:var(--on-accent)}
+.dm-send:disabled{opacity:.4}
+.dm-send .i{width:19px;height:19px;transform:rotate(45deg)}
+/* Group messages use the same outgoing/incoming visual language. */
+#view:has(.dm-header){padding:0}
+#view .dm-row .dm-bubble{max-width:min(84%,460px)}
+#view .dm-row.received .dm-bubble{background:#25272b;color:#f7f7f8}
+#view .dm-row.sent .dm-bubble{background:#a80f3b;color:#fff}
+#view .dm-row .dm-bubble b{color:#b8d5c8}
+#view .mc{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px))}
+#view .mc textarea{border-radius:22px;background:var(--chip)}
+/* Settings: functional light/dark toggle, remembered on this device. */
+.settings-page{padding:20px 16px}
+.settings-intro h2{font-size:25px;letter-spacing:-.035em;margin:8px 0 4px}
+.settings-intro p{margin:0 0 18px;color:var(--muted)}
+.settings-card{display:flex;align-items:center;justify-content:space-between;gap:14px;border:1px solid var(--line);border-radius:16px;padding:16px;background:var(--bg)}
+.settings-copy{display:grid;gap:4px}
+.settings-copy b{font-size:15px}
+.settings-copy span{font-size:13px;color:var(--muted);max-width:290px}
+.theme-switch{position:relative;display:inline-flex;width:52px;height:30px;flex:none}
+.theme-switch input{position:absolute;opacity:0;width:1px;height:1px}
+.theme-slider{position:absolute;inset:0;border-radius:999px;background:#c9ced0;transition:background .2s;cursor:pointer}
+.theme-slider::before{content:"";position:absolute;width:22px;height:22px;left:4px;top:4px;border-radius:50%;background:white;box-shadow:0 1px 3px rgba(0,0,0,.18);transition:transform .2s}
+.theme-switch input:checked+.theme-slider{background:var(--accent)}
+.theme-switch input:checked+.theme-slider::before{transform:translateX(22px)}
+.theme-switch input:focus-visible+.theme-slider{outline:2px solid var(--accent);outline-offset:3px}
+.settings-preview{display:flex;align-items:flex-start;gap:10px;padding:15px 4px;color:var(--muted);font-size:13px}
+.settings-preview b{color:var(--text)}
+.settings-preview p{margin:3px 0}
+.preview-dot{width:9px;height:9px;border-radius:50%;background:var(--accent);margin-top:5px;flex:none}
+:root[data-theme="dark"] .home-welcome{background:linear-gradient(120deg,#1b3029,#101613)}
+@media(max-width:420px){.home-welcome{padding:20px 14px 17px}#feed{padding-inline:8px}.dm-bubble{max-width:88%}.dm-thread{padding-inline:9px}}
