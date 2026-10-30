@@ -152,7 +152,7 @@ input[type="file"]::-webkit-file-upload-button{background:var(--accent);color:va
 .comp select{font-size:12px;padding:5px 10px}
 .comp .pub{font-size:12px;padding:6px 14px}
 .groupList{padding:8px;display:grid;gap:10px}
-.groupCard{border:1px solid var(--line);border-radius:18px;padding:14px;background:color-mix(in srgb,var(--bg) 92%,var(--accent) 8%));animation:groupIn .35s cubic-bezier(.2,.8,.2,1) both}
+.groupCard{border:1px solid var(--line);border-radius:18px;padding:14px;background:var(--chip));animation:groupIn .35s cubic-bezier(.2,.8,.2,1) both}
 .groupCardHead{display:flex;gap:12px;align-items:flex-start}
 .groupEmoji{width:44px;height:44px;display:grid;place-items:center;background:var(--chip);border-radius:14px;font-size:24px;flex:none}
 .groupScore{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:8px}
@@ -190,8 +190,8 @@ input[type="file"]::-webkit-file-upload-button{background:var(--accent);color:va
 .storyForm textarea{flex:1 1 100%;width:100%;resize:vertical;border:0;background:var(--chip);border-radius:12px;padding:10px 12px;outline:none}
 .storyUpload{font-size:12px;font-weight:700;border:1px solid var(--line);border-radius:999px;padding:7px 12px;cursor:pointer}
 .storyGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.storyCard{position:relative;min-height:210px;border-radius:18px;overflow:hidden;background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 22%,var(--bg)),var(--chip));border:1px solid var(--line);padding:12px;animation:storyRise .45s cubic-bezier(.2,.8,.2,1) both;transition:transform .25s,box-shadow .25s}
-.storyCard:hover{transform:translateY(-3px);box-shadow:0 12px 30px color-mix(in srgb,var(--text) 12%,transparent)}
+.storyCard{position:relative;min-height:210px;border-radius:18px;overflow:hidden;background:linear-gradient(145deg,var(--chip),var(--bg));border:1px solid var(--line);padding:12px;animation:storyRise .45s cubic-bezier(.2,.8,.2,1) both;transition:transform .25s,box-shadow .25s}
+.storyCard:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(15,20,25,.12)}
 .storyCard:nth-child(2n){animation-delay:70ms}
 .storyCard:nth-child(3n){animation-delay:130ms}
 .storyAuthor{display:flex;align-items:center;gap:7px;position:relative;z-index:1;font-size:11px}
@@ -200,7 +200,7 @@ input[type="file"]::-webkit-file-upload-button{background:var(--accent);color:va
 .storyAuthor small{margin-left:auto;color:var(--muted);white-space:nowrap}
 .storyText{font-size:16px;font-weight:700;line-height:1.4;overflow-wrap:anywhere;white-space:pre-wrap;margin-top:18px}
 .storyCard img,.storyCard video{display:block;width:calc(100% + 24px);max-width:none;margin:10px -12px -12px;max-height:280px;object-fit:cover;border-radius:0 0 18px 18px}
-.storyCard pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;background:color-mix(in srgb,var(--bg) 70%,transparent);padding:8px;border-radius:10px;margin-top:12px}
+.storyCard pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;background:var(--chip);padding:8px;border-radius:10px;margin-top:12px}
 .storyVideo{background:linear-gradient(150deg,#15182d,#4549a7)}
 .storyVideo .storyAuthor{color:#fff}
 .storyVideo .storyAuthor small{color:#d7d9ed}
