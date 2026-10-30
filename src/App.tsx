@@ -23,7 +23,6 @@ const html = `
   </header>
   <main>
     <div id="vFeed">
-      <section class="home-welcome"><div class="home-welcome-brand">Ramoscorptech</div><h1>Bienvenido a la comunidad</h1><p>Conecta, comparte ideas y descubre proyectos.</p></section>
       <div class="comp">
         <span class="av" id="composerAv">T</span>
         <div class="grow">
@@ -64,7 +63,7 @@ const html = `
 </aside>
 <section id="login" aria-label="Iniciar sesión">
   <div class="lw">
-    <div class="mark">RamosCorpTech</div>
+    <div class="mark shine">RC-comunidad</div>
     <h1>Bienvenido a la comunidad</h1>
     <p class="d" id="ls">Inicia sesión para entrar a la comunidad.</p>
     <label class="fl">Correo electrónico<input id="em" type="email" autocomplete="email" inputmode="email"></label>
