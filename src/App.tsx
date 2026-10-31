@@ -97,7 +97,8 @@ const html = `
     <p class="err" id="le" role="alert"></p>
     <button class="pub wide" id="lb">Iniciar sesión</button>
     <div class="or"><span>o</span></div>
-    <button class="join wide" id="rc">Continuar con RamosCorpTech</button>\n    <p class="d legal-login"><a href="#politica-privacidad">Política de privacidad</a> · <a href="#terminos">Términos y reglas</a> · <a href="https://ramoscorptech.com" target="_blank" rel="noopener noreferrer">RamosCorpTech</a></p>
+    <button class="join wide" id="rc">Continuar con RamosCorpTech</button>
+    <p class="d legal-login"><a href="#politica-privacidad">Política de privacidad</a> · <a href="#terminos">Términos y reglas</a> · <a href="https://ramoscorptech.com" target="_blank" rel="noopener noreferrer">RamosCorpTech</a></p>
   </div>
 </section>
 <div id="intro" hidden aria-hidden="true"><div><div class="w" id="iw"></div><div class="ln"></div></div></div>
