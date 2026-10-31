@@ -346,3 +346,8 @@ body:has(.chat-screen){overflow:hidden}
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
+
+/* Five-slot mobile navigation keeps the create-post action precisely centered. */
+nav.bar div{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));justify-content:stretch;align-items:center}
+nav.bar div>a,nav.bar div>button{justify-self:center;align-self:center}
+nav.bar .new{flex:none;width:44px;height:44px;padding:0}
