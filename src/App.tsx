@@ -170,8 +170,9 @@ export default function App(){
       const authorAvatar=avatar({display_name:st.author,avatar_url:st.avatar_url});
       const verified=verifiedIds.has(st.author_id)?" ✓":"";
       let media="";
-      if(st.media_type==="image"&&st.media_url)media='<img src="'+esc(st.media_url)+'" alt="Imagen de historia">';
-      else if(st.media_type==="video"&&st.media_url)media='<video src="'+esc(st.media_url)+'" controls playsinline preload="metadata"></video>';
+      const storyMediaUrl=safeCommunityMediaUrl(st.media_url);
+      if(st.media_type==="image"&&storyMediaUrl)media='<img src="'+esc(storyMediaUrl)+'" alt="Imagen de historia">';
+      else if(st.media_type==="video"&&storyMediaUrl)media='<video src="'+esc(storyMediaUrl)+'" controls playsinline preload="metadata"></video>';
       else if(st.media_type==="code")media='<pre><code>'+esc(st.body)+'</code></pre>';
       else media='<div class="storyText">'+esc(st.body)+'</div>';
       return '<article class="storyCard '+(st.media_type==="video"?"storyVideo":"")+'"><div class="storyAuthor"><span class="av">'+authorAvatar+'</span><b>'+esc(st.author)+verified+'</b><small>'+ago(st.created_at)+'</small></div>'+media+'</article>';
