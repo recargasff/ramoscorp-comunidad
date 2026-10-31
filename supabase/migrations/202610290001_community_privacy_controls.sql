@@ -27,6 +27,16 @@ begin
   delete from public.community_notifications where user_id = v_user or actor_id = v_user;
   delete from public.community_notification_subscriptions where user_id = v_user;
   delete from public.community_poll_votes where user_id = v_user;
+  delete from public.community_group_ratings where user_id = v_user;
+  delete from public.community_post_ratings where user_id = v_user;
+  delete from public.community_stories where author_id = v_user;
+  delete from public.community_recommendation_preferences where user_id = v_user;
+  delete from public.community_recommendations where user_id = v_user;
+  delete from public.community_recommendation_runs where user_id = v_user;
+  delete from public.community_verified_users where user_id = v_user;
+  update public.community_verified_users set verified_by = null where verified_by = v_user;
+  -- Preserve groups and their community content, but remove the deleted user's creator reference.
+  update public.community_groups set creator_id = null where creator_id = v_user;
   delete from public.community_reactions where user_id = v_user;
   delete from public.community_saved_posts where user_id = v_user;
   delete from public.contact_requests
