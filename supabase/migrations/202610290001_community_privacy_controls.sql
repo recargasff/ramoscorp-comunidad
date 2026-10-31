@@ -34,6 +34,12 @@ begin
       and lower(email) = v_email
       and subject = 'Feedback de RamosCorp Comunidad';
 
+  -- Remove only this user's private report attachments from the community bucket.
+  -- The bucket is community-scoped and its upload policy requires the user's UUID folder.
+  delete from storage.objects
+    where bucket_id = 'community-report-attachments'
+      and (name = v_user::text or name like v_user::text || '/%');
+
   delete from storage.objects
     where bucket_id = 'community-avatars'
       and (name = v_user::text or name like v_user::text || '/%');
