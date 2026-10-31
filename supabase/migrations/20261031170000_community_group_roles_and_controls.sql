@@ -105,10 +105,10 @@ as $$
 declare v_actor uuid:=auth.uid(); v_id uuid;
 begin
  if v_actor is null then raise exception 'Authentication required'; end if;
- if p_reason not in ('spam','abuse','inappropriate','scam','other') then raise exception 'Invalid report reason'; end if;
+ if p_reason not in ('spam','harassment','inappropriate','unsafe','other') then raise exception 'Invalid report reason'; end if;
  if not exists(select 1 from public.community_groups where id=p_group) then raise exception 'Group not found'; end if;
  insert into public.community_group_reports(reporter_id,group_id,reason,details)
- values(v_actor,p_group,p_reason,left(coalesce(p_details,''),2000)) returning id into v_id;
+ values(v_actor,p_group,p_reason,left(coalesce(p_details,''),1000)) returning id into v_id;
  return jsonb_build_object('success',true,'report_id',v_id);
 end $$;
 revoke all on function public.community_group_report(uuid,text,text) from public,anon;
