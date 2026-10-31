@@ -187,6 +187,7 @@ export default function App(){
       if(!body&&!storyFile){toast('Escribe algo o adjunta una imagen/video.');return;}
       let media_url:string|null=null,media_type="text";
       if(storyFile){
+        if(!["image/jpeg","image/png","image/webp","image/gif","video/mp4","video/webm"].includes(storyFile.type)){toast("Formato no permitido. Usa JPG, PNG, WebP, GIF, MP4 o WebM.");return;}if(storyFile.size>20*1024*1024){toast("El archivo de la historia supera 20 MB.");return;}
         media_type=storyFile.type.startsWith("video/")?"video":"image";
         const ext=storyFile.name.split(".").pop()?.toLowerCase()||"bin";
         const path=user.id+"/stories/"+crypto.randomUUID()+"."+ext;
