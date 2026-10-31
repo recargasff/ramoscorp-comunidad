@@ -351,3 +351,17 @@ body:has(.chat-screen){overflow:hidden}
 nav.bar div{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));justify-content:stretch;align-items:center}
 nav.bar div>a,nav.bar div>button{justify-self:center;align-self:center}
 nav.bar .new{flex:none;width:44px;height:44px;padding:0}
+
+/* Push permission prompt shown on community entry; browser permission is requested only after the user's tap. */
+.push-entry-prompt{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:20px;background:rgba(8,12,10,.58);backdrop-filter:blur(4px)}
+.push-entry-card{width:min(100%,380px);border:1px solid var(--line);border-radius:20px;padding:24px;background:var(--bg);color:var(--text);box-shadow:0 20px 70px rgba(0,0,0,.25)}
+.push-entry-icon{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:var(--chip);font-size:24px}
+.push-entry-card h2{font-size:21px;margin:14px 0 8px}
+.push-entry-card p{font-size:14px;line-height:1.5;color:var(--muted);margin:0}
+.push-entry-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}
+.push-entry-status{margin-top:12px!important;font-size:12px!important}
+/* Remove bright tap flashes on touch controls while retaining keyboard focus. */
+html,body,button,a,input,textarea,select,label,[role="button"]{-webkit-tap-highlight-color:transparent}
+button,a,label,[role="button"]{touch-action:manipulation}
+button:active,a:active,[role="button"]:active{background-color:transparent}
+button:focus:not(:focus-visible),a:focus:not(:focus-visible),[role="button"]:focus:not(:focus-visible){outline:none;box-shadow:none}
