@@ -1,3 +1,13 @@
+-- Align the community public-media bucket with the upload validators.
+-- The bucket is used only by Ramoscorp Comunidad; uploaded objects remain public by URL.
+update storage.buckets
+set file_size_limit = 20971520,
+    allowed_mime_types = array[
+      'image/jpeg','image/png','image/webp','image/gif',
+      'video/mp4','video/webm'
+    ]
+where id = 'community-avatars';
+
 -- RamosCorp Comunidad integrity guards.
 -- Direct-message recipients may update only read_at; participants and message content are immutable.
 create or replace function public.community_guard_direct_message_update()
