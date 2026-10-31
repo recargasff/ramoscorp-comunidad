@@ -232,11 +232,22 @@ export default function App(){
   const renderFeedback=()=>{$('view').innerHTML='<section class="gh"><label class="fl">Cuéntanos qué mejorarías<textarea id="fb" rows="3" maxlength="5000"></textarea></label><button class="pub" id="fs" disabled>Enviar feedback</button></section>'+(feedbacks.length?feedbacks.map(f=>'<div class="msg"><div class="grow"><p>'+esc(f.message)+'</p><small>'+ago(f.created_at)+'</small></div></div>').join(''):'<p class="notice">Tus comentarios enviados aparecerán aquí.</p>');const fb=$('fb') as HTMLTextAreaElement;fb.addEventListener('input',()=>{($('fs') as HTMLButtonElement).disabled=!fb.value.trim()});$('fs').addEventListener('click',async()=>{const message=fb.value.trim();if(message.length<10){toast('Escribe al menos 10 caracteres.');return;}const {error}=await supabase.from('contact_requests').insert({name:profile?.display_name||user.email||'Miembro',email:user.email,subject:'Feedback de RamosCorp Comunidad',message});if(error)toast('No se pudo enviar el feedback.');else{feedbacks.unshift({message,created_at:new Date().toISOString()});toast('Feedback enviado.');renderFeedback();}});
   };
 
-  const renderPrivacy=()=>{
-    $('view').innerHTML='<section class="gh"><h2>Privacidad y seguridad</h2><p class="d">Gestiona tus datos de RamosCorp Comunidad. Estas acciones no cambian tu cuenta de RamosCorpTech.</p></section>'+
+  const renderPrivacy=async()=>{
+    const {data:privacyRow}=await supabase.from('community_privacy_settings').select('*').eq('user_id',user.id).maybeSingle();
+    const privacy=privacyRow||{profile_visibility:'public',allow_friend_requests:true,allow_direct_messages:true};
+    $('view').innerHTML='<section class="gh"><h2>Privacidad y seguridad</h2><p class="d">Tus preferencias se aplican desde la base de datos. No cambian la cuenta principal de RamosCorpTech.</p></section>'+
+      '<section class="gh"><h3>Visibilidad del perfil</h3><label class="fl">Quién puede ver tu perfil<select id="profileVisibility"><option value="public" '+(privacy.profile_visibility==='public'?'selected':'')+'>Todos</option><option value="friends" '+(privacy.profile_visibility==='friends'?'selected':'')+'>Solo amistades</option><option value="private" '+(privacy.profile_visibility==='private'?'selected':'')+'>Solo yo</option></select></label><label class="row"><input type="checkbox" id="allowFriendRequests" '+(privacy.allow_friend_requests?'checked':'')+'> <span>Permitir solicitudes de amistad</span></label><label class="row"><input type="checkbox" id="allowDirectMessages" '+(privacy.allow_direct_messages?'checked':'')+'> <span>Permitir mensajes privados de amistades</span></label><p class="d">Los mensajes privados siguen limitados a amistades aceptadas. Estas opciones se aplican mediante reglas de acceso en la base de datos.</p><button class="pub" id="savePrivacy">Guardar privacidad</button></section>'+
       '<section class="gh"><h3>Borrar mis datos de Comunidad</h3><p>Elimina tu perfil, publicaciones, imágenes de Comunidad, comentarios, mensajes, amistades, membresías, notificaciones y reportes propios. Tu cuenta de RamosCorpTech permanece activa.</p><button class="danger" id="deleteCommunity">Borrar mis datos de Comunidad</button></section>'+
       '<section class="gh"><h3>Eliminar mi cuenta completa</h3><p>La cuenta de inicio de sesión se comparte con RamosCorpTech. La eliminación global podría quitarte el acceso a la plataforma principal. Por seguridad, aquí se registra una solicitud para revisión, no se elimina la cuenta automáticamente.</p><button class="danger" id="requestFullDelete">Solicitar eliminación completa</button><p class="d" id="deleteStatus"></p></section>'+
       '<section class="gh"><h3>RamosCorpTech</h3><p>Este botón solo te lleva al sitio principal. No elimina datos ni cuentas.</p><a class="join" href="https://ramoscorptech.com" target="_blank" rel="noopener noreferrer">Ir a RamosCorpTech</a></section>';
+    $('savePrivacy').addEventListener('click',async()=>{
+      const profile_visibility=($('profileVisibility') as HTMLSelectElement).value;
+      const allow_friend_requests=($('allowFriendRequests') as HTMLInputElement).checked;
+      const allow_direct_messages=($('allowDirectMessages') as HTMLInputElement).checked;
+      const {error}=await supabase.from('community_privacy_settings').upsert({user_id:user.id,profile_visibility,allow_friend_requests,allow_direct_messages,updated_at:new Date().toISOString()},{onConflict:'user_id'});
+      if(error){toast('No se pudieron guardar los ajustes de privacidad.');return;}
+      toast('Ajustes de privacidad guardados.');
+    });
     $('deleteCommunity').addEventListener('click',async()=>{
       if(!confirm('¿Borrar tus datos de RamosCorp Comunidad? Esta acción no se puede deshacer. Tu cuenta de RamosCorpTech se conservará.'))return;
       const confirmation=prompt('Escribe BORRAR COMUNIDAD para confirmar:');
