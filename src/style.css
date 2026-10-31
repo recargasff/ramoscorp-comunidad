@@ -336,3 +336,13 @@ body:has(.chat-screen){overflow:hidden}
  .chat-screen .dm-composer textarea{padding:10px 13px;font-size:16px}
  .chat-screen .dm-send{width:40px;height:40px}
 }
+
+
+/* Preserve real line breaks in user-authored community content. */
+.post p,
+.dm-bubble p,
+.msg p,
+.chat-item-copy span {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
