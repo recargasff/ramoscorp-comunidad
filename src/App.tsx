@@ -130,7 +130,7 @@ type Post={id:string;author_id:string;body:string;created_at:string;author:strin
 const esc=(s:any)=>String(s??'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]!));
 const initials=(s:string)=>s.trim().split(/\s+/).slice(0,2).map(x=>x[0]?.toUpperCase()||'').join('')||'T';
 const ago=(s:string)=>{const n=Math.max(0,Math.floor((Date.now()-new Date(s).getTime())/60000));return n<1?'ahora':n<60?n+' min':n<1440?Math.floor(n/60)+' h':Math.floor(n/1440)+' d';};
-const normalizeBodyText=(value:any)=>String(value??'').replace(/\\r\\n?/g,'\\n').replace(/\\\\n/g,'\\n');
+const normalizeBodyText=(value:any)=>String(value??'').replace(/\r\n?/g,'\n').replace(/\\n/g,'\n');
 const parseBody=(body:string)=>{const normalized=normalizeBodyText(body);try{const x=JSON.parse(normalized);if(x&&x.__rcPost===1)return {...x,text:normalizeBodyText(x.text)};}catch{}return {__rcPost:1,text:normalized,link:'',code:'',image:''};};
 const hrefFor=(hash:string)=>{location.hash=hash;};
 export default function App(){
