@@ -17,6 +17,8 @@ begin
 end;
 $$;
 
+revoke all on function public.community_guard_direct_message_update() from public, anon, authenticated;
+
 drop trigger if exists community_direct_messages_guard_update
   on public.community_direct_messages;
 create trigger community_direct_messages_guard_update
@@ -53,6 +55,8 @@ begin
   return new;
 end;
 $$;
+
+revoke all on function public.community_guard_friendship_update() from public, anon, authenticated;
 
 drop trigger if exists community_friendships_guard_update
   on public.community_friendships;
