@@ -179,7 +179,7 @@ export default function App(){
     const fileInput=$('storyFile') as HTMLInputElement;
     fileInput.addEventListener('change',()=>{
       storyFile=fileInput.files?.[0]||null;
-      if(storyFile&&storyFile.size>12*1024*1024){storyFile=null;fileInput.value='';toast('El archivo supera 12 MB.');}
+      if(storyFile&&storyFile.size>20*1024*1024){storyFile=null;fileInput.value='';toast('El archivo supera 20 MB.');}
     });
     form.addEventListener('submit',async e=>{
       e.preventDefault();
