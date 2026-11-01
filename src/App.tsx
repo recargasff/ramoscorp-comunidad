@@ -489,7 +489,7 @@ export default function App(){
     const ids=[...new Set(accepted.map(f=>f.requester_id===user.id?f.addressee_id:f.requester_id))];
     const {data:profiles,error}=ids.length?await supabase.from('community_profiles').select('user_id,display_name,avatar_url,public_number,bio').in('user_id',ids):{data:[],error:null};
     if(error){$('view').innerHTML='<p class="notice">No se pudo cargar tu lista de amigos.</p>';return;}
-    const rows=(profiles||[]).map(p=>'<a class="chat-item friend-list-item" href="#user-'+esc(p.user_id)+'"><span class="av">'+avatar(p)+'</span><span class="chat-item-copy"><b>'+esc(p.display_name||'Miembro')+'</b><small>#'+esc(p.public_number||'')+'</small><span>'+esc(p.bio||'')+'</span></span><a class="pub friend-chat-button" href="#chat-'+esc(p.user_id)+'">Chat</a></a>').join('');
+    const rows=(profiles||[]).map(p=>'<div class="chat-item friend-list-item"><a class="friend-profile-link" href="#user-'+esc(p.user_id)+'"><span class="av">'+avatar(p)+'</span><span class="chat-item-copy"><b>'+esc(p.display_name||'Miembro')+'</b><small>#'+esc(p.public_number||'')+'</small><span>'+esc(p.bio||'')+'</span></span></a><a class="pub friend-chat-button" href="#chat-'+esc(p.user_id)+'">Chat</a></div>').join('');
     $('view').innerHTML='<section class="chat-page"><div class="chat-page-heading"><h2>Amigos</h2><a class="join" href="#personas">Buscar personas</a></div><div class="chat-list">'+(rows||'<p class="empty">Todavía no tienes amistades aceptadas.</p>')+'</div></section>';
   };
   const renderFriendRequests=async()=>{
