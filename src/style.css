@@ -374,3 +374,30 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible),[role="button"]:foc
 .group-category-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
 .group-category-tile{display:flex;flex-direction:column;gap:4px;padding:12px;border:1px solid var(--line);border-radius:13px;background:var(--bg);color:var(--text);text-decoration:none}
 .group-category-tile b{font-size:13px}.group-category-tile span{font-size:11px;color:var(--muted)}
+
+/* Structured settings: interface, community and verified administrator access. */
+.settings-page{padding:18px 14px 28px;display:grid;gap:22px}
+.settings-section{display:grid;gap:12px}
+.settings-section-head{display:grid;gap:5px}
+.settings-section-head .tag{justify-self:start}
+.settings-section-head h3{font-size:19px;letter-spacing:-.02em;margin:2px 0 0}
+.settings-section-head p{color:var(--muted);margin:0;max-width:56ch}
+.settings-card,.settings-admin-card,.settings-link{border:1px solid var(--line);border-radius:16px;background:var(--chip);padding:14px;display:flex;gap:14px;align-items:center;justify-content:space-between;min-width:0}
+.settings-copy{display:grid;gap:4px;min-width:0}
+.settings-copy b,.settings-admin-card b,.settings-link b{font-weight:750}
+.settings-copy span,.settings-admin-card p,.settings-link small{font-size:13px;color:var(--muted);display:block}
+.settings-card-stack{display:grid;align-items:stretch;gap:12px}
+.settings-actions{display:flex;gap:8px;flex-wrap:wrap}
+.settings-actions button{font-size:13px}
+.settings-status{margin:0!important;font-size:13px}
+.settings-preview{display:flex;gap:10px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:14px}
+.settings-preview p{margin:2px 0 0;color:var(--muted);font-size:13px}
+.preview-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);flex:none}
+.settings-link{background:transparent;text-decoration:none}
+.settings-link>span:last-child{font-size:24px;color:var(--muted)}
+.settings-admin-card{align-items:flex-start}
+.settings-admin-card>div{min-width:0}
+.settings-admin-card p{margin:5px 0 0;line-height:1.5}
+.settings-admin-card .pub{white-space:nowrap;text-align:center}
+.admin-settings-section{padding-top:4px}
+@media(max-width:420px){.settings-page{padding-inline:10px}.settings-card,.settings-admin-card{padding:12px}.settings-admin-card{flex-direction:column}.settings-admin-card .pub{width:100%}.settings-actions{display:grid}.settings-actions button{width:100%}}
