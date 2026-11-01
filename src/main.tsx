@@ -1,1 +1,2 @@
 import React from 'react';import{createRoot}from'react-dom/client';import App from './App';import './style.css';import './community-design.css';import './responsive-actions.css';import './search-polish.css';import './profile-intro.css';import './chat-inbox-sections.css';createRoot(document.getElementById('root')!).render(<React.StrictMode><App/></React.StrictMode>);
+if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js',{scope:'/'}).catch(error=>console.warn('No se pudo registrar la PWA:',error));});}
