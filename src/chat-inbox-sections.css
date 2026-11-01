@@ -84,3 +84,14 @@
   .dm-row { padding-inline: 9px; }
   .dm-bubble { max-width: 88%; }
 }
+
+/* Prevent duplicated in-content titles on mobile: the app shell already shows the page title. Keep the shell back button untouched. */
+.chat-page-heading h2,
+.group-discovery-head h2 {
+  display: none;
+}
+.chat-page-heading {
+  margin-top: 0;
+  padding-top: 0;
+  min-height: 0;
+}
