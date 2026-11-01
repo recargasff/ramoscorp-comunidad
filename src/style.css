@@ -456,3 +456,8 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible),[role="button"]:foc
 .settings-detail .settings-actions{display:flex;gap:10px;flex-wrap:wrap}
 .settings-detail .settings-actions>*{min-height:44px}
 .settings-detail .settings-status{overflow-wrap:anywhere}
+
+/* Distintivo y selector de noticias oficiales */
+.news-badge{display:inline-flex;align-items:center;gap:4px;border:1px solid #e7a93b;background:#fff5dc;color:#8a5200;border-radius:999px;padding:3px 8px;font-size:10px;font-weight:850;letter-spacing:.06em;white-space:nowrap}
+.news-toggle{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--accent);padding:8px 10px;border:1px solid var(--line);border-radius:10px;white-space:nowrap}
+.news-toggle input{accent-color:var(--accent)}
