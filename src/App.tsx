@@ -176,7 +176,8 @@ export default function App(){
         gmp.hidden=true;
         const act=button.dataset.act;
         if(act==='copy-number'){navigator.clipboard?.writeText(String(g.group_number)).then(()=>toast('Número del grupo copiado: #'+g.group_number),()=>toast('No se pudo copiar.'));return;}
-        if(act==='whatsapp'){const inviteUrl=location.origin+'/#g-'+g.id;const message='Únete al grupo '+g.name+' de Ramoscorp Comunidad. Número del grupo: #'+g.group_number+'. Enlace: '+inviteUrl;window.open('https://wa.me/?text='+encodeURIComponent(message),'_blank','noopener,noreferrer');return;}\n        if(act==='image'){
+        if(act==='whatsapp'){const inviteUrl=location.origin+'/#g-'+g.id;const message='Únete al grupo '+g.name+' de Ramoscorp Comunidad. Número del grupo: #'+g.group_number+'. Enlace: '+inviteUrl;window.open('https://wa.me/?text='+encodeURIComponent(message),'_blank','noopener,noreferrer');return;}
+        if(act==='image'){
           if(!['owner','admin'].includes(g.role||'')){toast('Solo administradores pueden cambiar la imagen.');return;}
           const inp=document.createElement('input');
           inp.type='file';inp.accept='image/png,image/jpeg,image/webp';
