@@ -1,0 +1,78 @@
+/* User search results: make the avatar/name area a clear profile link. */
+.chat-search-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1 1 220px;
+  min-width: 0;
+  border-radius: 12px;
+  padding: 4px;
+}
+.chat-search-profile:hover {
+  background: var(--hover);
+}
+.chat-search-profile .chat-item-copy {
+  flex: 1;
+  min-width: 0;
+}
+.chat-search-profile .chat-item-copy small {
+  color: var(--muted);
+  font-size: 12px;
+}
+.chat-search-user {
+  flex-wrap: wrap;
+}
+.chat-search-user > .pub,
+.chat-search-user > .join,
+.chat-search-user > .tag {
+  flex: 0 1 auto;
+  max-width: 100%;
+}
+.dm-profile-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+  border-radius: 12px;
+  padding: 4px 8px;
+}
+.dm-profile-link:hover {
+  background: var(--hover);
+}
+.dm-contact {
+  min-width: 0;
+}
+.dm-contact b,
+.dm-contact small {
+  display: block;
+  overflow-wrap: anywhere;
+}
+.dm-contact small {
+  color: var(--muted);
+  font-size: 12px;
+}
+.intro-composer {
+  border-top: 1px solid var(--line);
+}
+.intro-note {
+  margin: 0;
+  padding: 0 16px 12px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+@media (max-width: 380px) {
+  .chat-search-user {
+    align-items: stretch;
+    gap: 8px;
+  }
+  .chat-search-profile {
+    flex-basis: 100%;
+  }
+  .chat-search-user > .pub,
+  .chat-search-user > .join {
+    flex: 1 1 125px;
+    text-align: center;
+  }
+}
