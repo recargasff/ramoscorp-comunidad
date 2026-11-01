@@ -216,10 +216,42 @@ export default function App(){
           const {data:profiles}=ids.length?await supabase.from('community_profiles').select('user_id,display_name,public_number').in('user_id',ids):{data:[]};
           const {data:verified}=ids.length?await supabase.from('community_verified_users').select('user_id').in('user_id',ids):{data:[]};
           const verifiedIdsForGroup=new Set((verified||[]).map(x=>x.user_id));
-          alert((members||[]).map(member=>{
+          const memberRows=(members||[]).map(member=>{
             const profile=(profiles||[]).find(x=>x.user_id===member.user_id);
-            return (profile?.display_name||'Miembro')+' #'+(profile?.public_number||'')+' · '+member.role+(verifiedIdsForGroup.has(member.user_id)?' · Ramos Tech ✓':'')+' · '+member.user_id;
-          }).join('\\n'));
+            const name=profile?.display_name||'Miembro';
+            const role=member.role||'member';
+            const canManage=['owner','admin'].includes(g.role||'')&&member.user_id!==user.id&&role!=='owner'&&(g.role==='owner'||role!=='admin');
+            return '<div class="row group-member-row"><a href="#user-'+esc(member.user_id)+'" class="main"><b>'+esc(name)+'</b><span class="d">#'+esc(profile?.public_number||'')+' · '+esc(role)+(verifiedIdsForGroup.has(member.user_id)?' · Ramos Tech ✓':'')+'</span></a><div class="rc-menu-wrap"><button class="rc-menu-btn" data-member-menu="'+esc(member.user_id)+'" aria-label="Opciones de '+esc(name)+'">⋮</button><div class="rc-menu-pop" hidden><button data-member-act="profile" data-member="'+esc(member.user_id)+'">Información / perfil público</button><button data-member-act="report" data-member="'+esc(member.user_id)+'">Reportar miembro</button>'+(canManage?'<button data-member-act="admin" data-member="'+esc(member.user_id)+'">Nombrar admin</button><button class="danger" data-member-act="kick" data-member="'+esc(member.user_id)+'">Expulsar del grupo</button>':'')+'</div></div></div>';
+          }).join('');
+          $('view').insertAdjacentHTML('beforeend','<section class="gh group-members-panel"><h3>Miembros del grupo</h3><p class="d">Cada miembro tiene opciones de perfil y reporte. Las acciones administrativas dependen de tu rol.</p>'+memberRows+'</section>');
+          const panel=$('view').querySelector('.group-members-panel')!;
+          panel.addEventListener('click',async e=>{
+            const target=e.target as HTMLElement;
+            const menu=target.closest<HTMLElement>('[data-member-menu]');
+            if(menu){const pop=menu.parentElement?.querySelector<HTMLElement>('.rc-menu-pop');if(pop)pop.hidden=!pop.hidden;return;}
+            const action=target.closest<HTMLElement>('[data-member-act]');if(!action)return;
+            const memberId=action.dataset.member||'',act=action.dataset.memberAct||'';
+            if(act==='profile'){location.hash='#user-'+memberId;return;}
+            if(act==='report'){
+              const reason=prompt('Motivo del reporte: spam, acoso, contenido inapropiado, inseguro u otro','spam')||'';if(!reason)return;
+              const details=prompt('Detalles (opcional)','')||'';
+              const {error}=await supabase.from('community_reports').insert({reporter_id:user.id,target_type:'user',target_id:memberId,reason,details:('Reporte de miembro del grupo '+g.id+' · '+details).slice(0,1000)});
+              if(error)toast('No se pudo enviar el reporte.');else toast('Reporte enviado.');
+              return;
+            }
+            if(act==='admin'){
+              if(g.role!=='owner'){toast('Solo el propietario puede nombrar administradores.');return;}
+              if(!confirm('¿Nombrar administrador a este miembro?'))return;
+              const {error}=await supabase.rpc('community_group_set_role',{p_group:g.id,p_user:memberId,p_role:'admin'});
+              if(error)toast('No se pudo nombrar administrador.');else{toast('Administrador nombrado.');await loadAll();renderGroups(getGroup(g.id));}
+              return;
+            }
+            if(act==='kick'){
+              if(!confirm('¿Expulsar a este miembro del grupo?'))return;
+              const {error}=await supabase.rpc('community_group_kick_member',{p_group:g.id,p_user:memberId});
+              if(error)toast('No se pudo expulsar. Comprueba tus permisos.');else{toast('Miembro expulsado.');await loadAll();renderGroups(getGroup(g.id));}
+            }
+          });
           return;
         }
         if(act==='report'||act==='error'){
