@@ -126,7 +126,7 @@ const icons = `<svg width="0" height="0" style="position:absolute" aria-hidden="
 <symbol id="menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol><symbol id="back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
 </defs></svg>`;
 
-type Group={id:string;name:string;description:string;emoji:string;category:string;image_url:string;rules:string;joined:boolean;members:number};
+type Group={id:string;name:string;description:string;emoji:string;category:string;image_url:string;rules:string;joined:boolean;members:number;role?:'owner'|'admin'|'member'};
 type Post={id:string;author_id:string;body:string;created_at:string;author:string;avatar_url:string|null;public_number?:number|null;likes:number;liked:boolean;myReaction:string|null;reactions:any;content:any};type Story={id:string;author_id:string;body:string;media_url:string|null;media_type:string;created_at:string;expires_at:string;author:string;avatar_url:string|null};
 const esc=(s:any)=>String(s??'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]!));
 const safeHttpUrl=(value:any)=>{try{const u=new URL(String(value??''));if(['http:','https:'].includes(u.protocol)&&u.hostname&&!u.username&&!u.password)return u.href;}catch{}return '';};
