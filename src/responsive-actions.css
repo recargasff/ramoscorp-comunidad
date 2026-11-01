@@ -1,0 +1,101 @@
+/* Responsive layout safeguards: keep actions readable and prevent button collisions on small screens. */
+.row,
+.btns,
+.groupCardActions,
+.push-entry-actions,
+.storyForm,
+.chat-search-user {
+  flex-wrap: wrap;
+}
+.row > .main {
+  flex: 1 1 150px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.row > button,
+.row > a,
+.row > .join {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.row > button.pub,
+.row > button.join,
+.row > a.join {
+  min-height: 42px;
+  padding: 9px 16px;
+}
+.row > .main + button,
+.row > .main + a {
+  margin-left: 0;
+}
+.btns button,
+.groupCardActions > button,
+.push-entry-actions > button {
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.groupCardActions {
+  align-items: center;
+}
+.groupCardActions > * {
+  flex: 0 1 auto;
+}
+.chat-search-user .chat-item-copy {
+  flex: 1 1 150px;
+  min-width: 0;
+}
+@media (max-width: 480px) {
+  .row {
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 12px;
+  }
+  .row > .av {
+    width: 40px;
+    height: 40px;
+  }
+  .row > .main {
+    flex: 1 1 calc(100% - 54px);
+  }
+  .row > button,
+  .row > a,
+  .row > .join {
+    flex: 1 1 120px;
+  }
+  .row > .main + button,
+  .row > .main + a,
+  .row > .main + .join {
+    margin-left: 0;
+  }
+  .btns {
+    gap: 8px;
+  }
+  .btns button {
+    flex: 1 1 120px;
+    padding: 11px 14px;
+  }
+  .groupCardActions {
+    justify-content: flex-start;
+  }
+  .groupCardActions > button {
+    flex: 1 1 120px;
+  }
+  .push-entry-actions {
+    justify-content: stretch;
+  }
+  .push-entry-actions > button {
+    flex: 1 1 120px;
+  }
+}
+@media (max-width: 360px) {
+  .row > button,
+  .row > a,
+  .row > .join {
+    flex-basis: 100%;
+  }
+}
