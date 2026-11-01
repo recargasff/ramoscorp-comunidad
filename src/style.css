@@ -410,6 +410,11 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible),[role="button"]:foc
 .profile-bio{margin:14px 0;overflow-wrap:anywhere}
 .profile-stats{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
 .profile-editor-links h3{margin:0 0 4px;font-size:18px}
+.profile-edit-accordion>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;font-size:18px;font-weight:700;min-height:28px;outline-offset:4px}
+.profile-edit-accordion>summary::-webkit-details-marker{display:none}
+.profile-edit-accordion-chevron{font-size:22px;color:var(--muted);transition:transform .18s ease}
+.profile-edit-accordion[open]>.profile-edit-accordion-chevron{transform:rotate(180deg)}
+.profile-edit-accordion[open]>summary .profile-edit-accordion-chevron{transform:rotate(180deg)}
 .profile-editor-links>p{margin:0 0 12px}
 .profile-action{width:100%;display:grid;grid-template-columns:40px minmax(0,1fr) 18px;align-items:center;gap:12px;padding:13px 8px;text-align:left;border-bottom:1px solid var(--line);min-width:0}
 .profile-action:last-child{border-bottom:0}
