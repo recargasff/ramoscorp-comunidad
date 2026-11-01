@@ -1,1 +1,29 @@
-{"name":"RamosCorp Comunidad","short_name":"RamosCorp","description":"Conecta, comparte y aprende en RamosCorp Comunidad.","start_url":"/","scope":"/","display":"standalone","orientation":"portrait","background_color":"#09090d","theme_color":"#4650d8","icons":[{"src":"/ramoscorp-icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
+{
+  "name": "RamosCorp Comunidad",
+  "short_name": "RamosCorp",
+  "description": "Conecta, comparte y aprende en RamosCorp Comunidad.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#09090d",
+  "theme_color": "#4650d8",
+  "categories": [
+    "social",
+    "education"
+  ],
+  "icons": [
+    {
+      "src": "/ramoscorp-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/ramoscorp-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
