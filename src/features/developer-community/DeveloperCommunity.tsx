@@ -10,7 +10,7 @@ type Project = {
   description: string | null;
   status: 'idea' | 'building' | 'completed' | 'paused';
   technologies: string[];
-  repo_url: string | null;
+  repository_url: string | null;
   demo_url: string | null;
   looking_for_collaborators: boolean;
   created_at: string;
@@ -80,10 +80,10 @@ export default function DeveloperCommunity() {
   const [projectFilter, setProjectFilter] = useState<'all' | 'open'>('all');
   const [projectForm, setProjectForm] = useState({
     title: '', summary: '', description: '', status: 'idea' as Project['status'],
-    technologies: '', repo_url: '', demo_url: '', looking_for_collaborators: true,
+    technologies: '', repository_url: '', demo_url: '', looking_for_collaborators: true,
   });
   const [resourceForm, setResourceForm] = useState({
-    title: '', description: '', category: 'Tutorial', technology: '', resource_url: '',
+    title: '', description: '', category: 'tutorial', technology: '', resource_url: '',
   });
   const [collabMessages, setCollabMessages] = useState<Record<string, string>>({});
 
@@ -167,7 +167,7 @@ export default function DeveloperCommunity() {
       description: projectForm.description.trim() || null,
       status: projectForm.status,
       technologies,
-      repo_url: safeExternalUrl(projectForm.repo_url) || null,
+      repository_url: safeExternalUrl(projectForm.repository_url) || null,
       demo_url: safeExternalUrl(projectForm.demo_url) || null,
       looking_for_collaborators: projectForm.looking_for_collaborators,
     });
@@ -203,7 +203,7 @@ export default function DeveloperCommunity() {
     if (insertError) setNotice('No se pudo compartir el recurso. Inténtalo de nuevo.');
     else {
       setNotice('Recurso compartido.');
-      setResourceForm({ title: '', description: '', category: 'Tutorial', technology: '', resource_url: '' });
+      setResourceForm({ title: '', description: '', category: 'tutorial', technology: '', resource_url: '' });
       setShowResourceForm(false);
       await loadData(sessionUserId);
     }
@@ -331,7 +331,7 @@ export default function DeveloperCommunity() {
                 <label className="dc-span-2">Resumen<input required maxLength={220} value={projectForm.summary} onChange={e => setProjectForm({...projectForm,summary:e.target.value})} placeholder="¿Qué hace y para quién?" /></label>
                 <label className="dc-span-2">Descripción<textarea rows={3} maxLength={4000} value={projectForm.description} onChange={e => setProjectForm({...projectForm,description:e.target.value})} placeholder="Cuéntanos un poco más…" /></label>
                 <label className="dc-span-2">Tecnologías<input value={projectForm.technologies} onChange={e => setProjectForm({...projectForm,technologies:e.target.value})} placeholder="React, TypeScript, Supabase (separadas por comas)" /></label>
-                <label>Repositorio<input type="url" value={projectForm.repo_url} onChange={e => setProjectForm({...projectForm,repo_url:e.target.value})} placeholder="https://github.com/…" /></label>
+                <label>Repositorio<input type="url" value={projectForm.repository_url} onChange={e => setProjectForm({...projectForm,repository_url:e.target.value})} placeholder="https://github.com/…" /></label>
                 <label>Demo<input type="url" value={projectForm.demo_url} onChange={e => setProjectForm({...projectForm,demo_url:e.target.value})} placeholder="https://…" /></label>
               </div>
               <label className="dc-checkbox"><input type="checkbox" checked={projectForm.looking_for_collaborators} onChange={e => setProjectForm({...projectForm,looking_for_collaborators:e.target.checked})} /> Busco colaboradores</label>
@@ -356,7 +356,7 @@ export default function DeveloperCommunity() {
               <div className="dc-form-title"><h2>Comparte un recurso</h2><p>Enlace a una guía, documentación, tutorial o herramienta.</p></div>
               <div className="dc-form-grid">
                 <label>Título<input required maxLength={100} value={resourceForm.title} onChange={e => setResourceForm({...resourceForm,title:e.target.value})} /></label>
-                <label>Categoría<select value={resourceForm.category} onChange={e => setResourceForm({...resourceForm,category:e.target.value})}>{['Tutorial','Documentación','Herramienta','Pregunta','Otro'].map(item=><option key={item}>{item}</option>)}</select></label>
+                <label>Categoría<select value={resourceForm.category} onChange={e => setResourceForm({...resourceForm,category:e.target.value})}>{[['tutorial','Tutorial'],['documentation','Documentación'],['tool','Herramienta'],['question','Pregunta'],['course','Curso'],['other','Otro']].map(([value,label])=><option key={value} value={value}>{label}</option>)}</select></label>
                 <label className="dc-span-2">Descripción<textarea rows={2} maxLength={1200} value={resourceForm.description} onChange={e => setResourceForm({...resourceForm,description:e.target.value})} /></label>
                 <label>Tecnología<input value={resourceForm.technology} onChange={e => setResourceForm({...resourceForm,technology:e.target.value})} placeholder="Ej. Python" /></label>
                 <label>Enlace<input required type="url" value={resourceForm.resource_url} onChange={e => setResourceForm({...resourceForm,resource_url:e.target.value})} placeholder="https://…" /></label>
@@ -364,7 +364,7 @@ export default function DeveloperCommunity() {
               <div className="dc-form-actions"><button type="button" className="dc-secondary" onClick={() => setShowResourceForm(false)}>Cancelar</button><button type="submit" className="dc-primary" disabled={busy}>{busy ? 'Compartiendo…' : 'Compartir'}</button></div>
             </form>}
             {loading ? <div className="dc-loading">Cargando recursos…</div> : resources.length === 0 ? <EmptyState title="Aún no hay recursos" body="Comparte la primera guía, documentación o herramienta que te haya servido." /> :
-              <div className="dc-resource-grid">{resources.map(resource => <article className="dc-resource-card" key={resource.id}><span className="dc-resource-category">{resource.category}</span><h3>{resource.title}</h3>{resource.description && <p>{resource.description}</p>}<div className="dc-resource-meta">{resource.technology && <span>{resource.technology}</span>}<a href={safeExternalUrl(resource.resource_url)} target="_blank" rel="noopener noreferrer">Abrir recurso ↗</a></div></article>)}</div>}
+              <div className="dc-resource-grid">{resources.map(resource => <article className="dc-resource-card" key={resource.id}><span className="dc-resource-category">{{documentation:'Documentación',course:'Curso',tutorial:'Tutorial',tool:'Herramienta',question:'Pregunta',other:'Otro'}[resource.category] || resource.category}</span><h3>{resource.title}</h3>{resource.description && <p>{resource.description}</p>}<div className="dc-resource-meta">{resource.technology && <span>{resource.technology}</span>}<a href={safeExternalUrl(resource.resource_url)} target="_blank" rel="noopener noreferrer">Abrir recurso ↗</a></div></article>)}</div>}
           </>}
         </main>
       </div>
@@ -379,7 +379,7 @@ function ProjectGrid({ projects, userId, onRequest, busy }: { projects: Project[
     <div className="dc-project-top"><span className={`dc-status ${statusClasses[project.status]}`}>{statusLabels[project.status]}</span>{project.looking_for_collaborators && <span className="dc-open-label">Buscando equipo</span>}</div>
     <h3>{project.title}</h3><p>{project.summary}</p>
     {project.technologies?.length > 0 && <div className="dc-tags">{project.technologies.map(tag => <span key={tag}>{tag}</span>)}</div>}
-    <div className="dc-project-links">{project.repo_url && safeExternalUrl(project.repo_url) && <a href={safeExternalUrl(project.repo_url)} target="_blank" rel="noopener noreferrer">Repositorio ↗</a>}{project.demo_url && safeExternalUrl(project.demo_url) && <a href={safeExternalUrl(project.demo_url)} target="_blank" rel="noopener noreferrer">Demo ↗</a>}</div>
+    <div className="dc-project-links">{project.repository_url && safeExternalUrl(project.repository_url) && <a href={safeExternalUrl(project.repository_url)} target="_blank" rel="noopener noreferrer">Repositorio ↗</a>}{project.demo_url && safeExternalUrl(project.demo_url) && <a href={safeExternalUrl(project.demo_url)} target="_blank" rel="noopener noreferrer">Demo ↗</a>}</div>
     <div className="dc-project-bottom"><span>{new Date(project.created_at).toLocaleDateString()}</span>{project.owner_id !== userId && project.looking_for_collaborators && <button className="dc-text-button" disabled={busy} onClick={() => onRequest(project)}>Solicitar colaborar ↗</button>}</div>
   </article>)}</div>;
 }
