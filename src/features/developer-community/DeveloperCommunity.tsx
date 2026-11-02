@@ -174,14 +174,14 @@ export default function DeveloperCommunity() {
     if (insertError) setNotice('No se pudo publicar el proyecto. Revisa los campos e inténtalo de nuevo.');
     else {
       setNotice('Proyecto publicado.');
-      setProjectForm({ title: '', summary: '', description: '', status: 'idea', technologies: '', repo_url: '', demo_url: '', looking_for_collaborators: true });
+      setProjectForm({ title: '', summary: '', description: '', status: 'idea', technologies: '', repository_url: '', demo_url: '', looking_for_collaborators: true });
       setShowProjectForm(false);
       await loadData(sessionUserId);
     }
     setBusy(false);
   };
 
-  const createResource = async (event: React.FormEvent) => {
+  const createResource = async (event: FormEvent) => {
     event.preventDefault();
     if (!sessionUserId || busy) return;
     const title = resourceForm.title.trim();
@@ -253,7 +253,7 @@ export default function DeveloperCommunity() {
     setBusy(false);
   };
 
-  const navItems: { id: Screen; label: string; icon: string }[] = [
+  const resourceCategories: { value: string; label: string }[] = [\n    { value: 'tutorial', label: 'Tutorial' }, { value: 'documentation', label: 'Documentación' },\n    { value: 'tool', label: 'Herramienta' }, { value: 'question', label: 'Pregunta' },\n    { value: 'course', label: 'Curso' }, { value: 'other', label: 'Otro' },\n  ];\n\n  const navItems: { id: Screen; label: string; icon: string }[] = [
     { id: 'explore', label: 'Explorar', icon: '⌕' },
     { id: 'projects', label: 'Proyectos', icon: '⌘' },
     { id: 'collaborations', label: 'Colaboraciones', icon: '↗' },
@@ -356,7 +356,7 @@ export default function DeveloperCommunity() {
               <div className="dc-form-title"><h2>Comparte un recurso</h2><p>Enlace a una guía, documentación, tutorial o herramienta.</p></div>
               <div className="dc-form-grid">
                 <label>Título<input required maxLength={100} value={resourceForm.title} onChange={e => setResourceForm({...resourceForm,title:e.target.value})} /></label>
-                <label>Categoría<select value={resourceForm.category} onChange={e => setResourceForm({...resourceForm,category:e.target.value})}>{[['tutorial','Tutorial'],['documentation','Documentación'],['tool','Herramienta'],['question','Pregunta'],['course','Curso'],['other','Otro']].map(([value,label])=><option key={value} value={value}>{label}</option>)}</select></label>
+                <label>Categoría<select value={resourceForm.category} onChange={e => setResourceForm({...resourceForm,category:e.target.value})}>{resourceCategories.map(({value,label})=><option key={value} value={value}>{label}</option>)}</select></label>
                 <label className="dc-span-2">Descripción<textarea rows={2} maxLength={1200} value={resourceForm.description} onChange={e => setResourceForm({...resourceForm,description:e.target.value})} /></label>
                 <label>Tecnología<input value={resourceForm.technology} onChange={e => setResourceForm({...resourceForm,technology:e.target.value})} placeholder="Ej. Python" /></label>
                 <label>Enlace<input required type="url" value={resourceForm.resource_url} onChange={e => setResourceForm({...resourceForm,resource_url:e.target.value})} placeholder="https://…" /></label>
