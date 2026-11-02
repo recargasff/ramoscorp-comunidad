@@ -253,7 +253,13 @@ export default function DeveloperCommunity() {
     setBusy(false);
   };
 
-  const resourceCategories: { value: string; label: string }[] = [\n    { value: 'tutorial', label: 'Tutorial' }, { value: 'documentation', label: 'Documentación' },\n    { value: 'tool', label: 'Herramienta' }, { value: 'question', label: 'Pregunta' },\n    { value: 'course', label: 'Curso' }, { value: 'other', label: 'Otro' },\n  ];\n\n  const navItems: { id: Screen; label: string; icon: string }[] = [
+  const resourceCategories: { value: string; label: string }[] = [
+    { value: 'tutorial', label: 'Tutorial' }, { value: 'documentation', label: 'Documentación' },
+    { value: 'tool', label: 'Herramienta' }, { value: 'question', label: 'Pregunta' },
+    { value: 'course', label: 'Curso' }, { value: 'other', label: 'Otro' },
+  ];
+
+  const navItems: { id: Screen; label: string; icon: string }[] = [
     { id: 'explore', label: 'Explorar', icon: '⌕' },
     { id: 'projects', label: 'Proyectos', icon: '⌘' },
     { id: 'collaborations', label: 'Colaboraciones', icon: '↗' },
