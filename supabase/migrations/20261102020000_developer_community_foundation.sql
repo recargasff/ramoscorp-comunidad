@@ -67,6 +67,11 @@ create index if not exists developer_collaboration_requester_idx
 
 alter table public.developer_collaboration_requests enable row level security;
 
+-- Recipients may only change the status when responding; keep requester, project,
+-- recipient, and message immutable through the authenticated API.
+revoke update on public.developer_collaboration_requests from authenticated;
+grant update (status) on public.developer_collaboration_requests to authenticated;
+
 drop policy if exists "Participants can view collaboration requests" on public.developer_collaboration_requests;
 create policy "Participants can view collaboration requests"
   on public.developer_collaboration_requests for select to authenticated
