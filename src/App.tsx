@@ -1,5 +1,7 @@
 import {useEffect,useRef} from 'react';
+import {createRoot} from 'react-dom/client';
 import {supabase} from './lib/supabase';
+import DeveloperCommunity from './features/developer-community/DeveloperCommunity';
 
 const html = `
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -82,6 +84,7 @@ const html = `
   <div class="dh"><span class="av" id="dav">T</span><div><b id="dn">Tú</b><span class="d" id="de"></span></div></div>
   <div class="dl">
     <a href="#solicitudes" id="friendRequestsLink">Solicitudes de amistad <span id="friendRequestsCount"></span></a><a href="#amigos" id="friendsLink">Amigos</a><a href="#reportes">Reportes realizados</a><a href="#privacidad">Privacidad y seguridad</a><a href="#configuracion">Configuración</a><a href="#admin" id="adminLink" hidden>Panel de administración</a>
+    <a href="/?module=developers">Comunidad de desarrolladores</a>
     <a href="#feedback">Feedback enviado</a>
     <a href="#invitacion">Código de invitación</a>
     <div class="th"><span>Tema</span><div><button data-th="auto">Auto</button><button data-th="light">Claro</button><button data-th="dark">Oscuro</button></div></div>
@@ -142,6 +145,11 @@ export default function App(){
  const host=useRef<HTMLDivElement>(null);
  useEffect(()=>{
   const root=host.current;if(!root)return;
+  if(new URLSearchParams(window.location.search).get('module')==='developers'){
+    const mount=document.createElement('div');root.replaceChildren(mount);
+    const developerRoot=createRoot(mount);developerRoot.render(<DeveloperCommunity/>);
+    return ()=>developerRoot.unmount();
+  }
   root.innerHTML=icons+html;root.insertAdjacentHTML('beforeend','<style>.verified{display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin-left:5px;width:17px;height:17px;border-radius:50%;font-size:11px;font-weight:800;color:#fff;background:linear-gradient(135deg,#7c3aed,#2563eb);box-shadow:0 0 0 1px #fff3}.rc-menu-btn{border:1px solid #8885;background:transparent;color:inherit;border-radius:8px;padding:6px 10px}.rc-menu-pop{position:absolute;right:12px;z-index:50;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:6px;box-shadow:0 12px 30px #0003;min-width:210px}.rc-menu-pop button{display:block;width:100%;padding:9px 12px;text-align:left;border:0;background:transparent;color:inherit;border-radius:6px}.rc-menu-pop button:hover{background:var(--hover)}.rc-menu-pop button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}.rc-menu-pop button.danger{color:#dc2626}.rc-menu-wrap{position:relative}.groupEmoji,.group-chat-avatar{overflow:hidden;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}.groupEmoji img,.group-chat-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}</style>');
   const $=(id:string)=>root.querySelector<HTMLElement>('#'+id)!;
   const app=()=>root.querySelector<HTMLElement>('.app')!;
