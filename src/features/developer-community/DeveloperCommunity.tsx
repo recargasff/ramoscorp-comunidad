@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState, type FormEvent } from 'react';
 import { supabase } from '../../lib/supabase';
 import './developer-community.css';
 
@@ -148,7 +148,7 @@ export default function DeveloperCommunity() {
   const pendingReceived = collaborations.filter(item => item.recipient_id === sessionUserId && item.status === 'pending');
   const sentRequests = collaborations.filter(item => item.requester_id === sessionUserId);
 
-  const createProject = async (event: React.FormEvent) => {
+  const createProject = async (event: FormEvent) => {
     event.preventDefault();
     if (!sessionUserId || busy) return;
     const title = projectForm.title.trim();
