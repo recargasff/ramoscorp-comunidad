@@ -166,3 +166,32 @@ drop trigger if exists developer_collaboration_requests_set_updated_at on public
 create trigger developer_collaboration_requests_set_updated_at
   before update on public.developer_collaboration_requests
   for each row execute function public.developer_set_updated_at();
+
+
+-- Prevent recipients from rewriting the request while responding to it.
+-- RLS controls who may update the row; this trigger limits the allowed transition.
+create or replace function public.developer_guard_collaboration_response()
+returns trigger language plpgsql set search_path = public
+as $$
+begin
+  if new.id is distinct from old.id
+    or new.project_id is distinct from old.project_id
+    or new.requester_id is distinct from old.requester_id
+    or new.recipient_id is distinct from old.recipient_id
+    or new.message is distinct from old.message
+    or new.created_at is distinct from old.created_at then
+    raise exception 'Collaboration request details cannot be changed';
+  end if;
+
+  if old.status <> 'pending' or new.status not in ('accepted', 'declined') then
+    raise exception 'Only pending requests may be accepted or declined';
+  end if;
+
+  return new;
+end;
+$$;
+
+drop trigger if exists developer_collaboration_guard_response on public.developer_collaboration_requests;
+create trigger developer_collaboration_guard_response
+  before update on public.developer_collaboration_requests
+  for each row execute function public.developer_guard_collaboration_response();
