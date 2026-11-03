@@ -461,3 +461,9 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible),[role="button"]:foc
 .news-badge{display:inline-flex;align-items:center;gap:4px;border:1px solid #e7a93b;background:#fff5dc;color:#8a5200;border-radius:999px;padding:3px 8px;font-size:10px;font-weight:850;letter-spacing:.06em;white-space:nowrap}
 .news-toggle{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--accent);padding:8px 10px;border:1px solid var(--line);border-radius:10px;white-space:nowrap}
 .news-toggle input{accent-color:var(--accent)}
+
+/* Verificado General compartido con el ecosistema RamosCorpTech */
+.general-verified-name{background:linear-gradient(100deg,#fff1b8 0%,#d6a43b 38%,#fff0b0 68%,#c18a27 100%);background-size:220% auto;color:transparent;background-clip:text;-webkit-background-clip:text;text-shadow:0 0 10px rgba(216,168,60,.22);animation:rctVerifiedShine 7s ease-in-out infinite}
+.general-verified-badge{display:inline-flex;align-items:center;justify-content:center;margin-left:5px;padding:2px 7px;border-radius:999px;background:linear-gradient(135deg,#fff1b8,#c18a27 55%,#ffe9a0);color:#2c1b05;font-size:.72em;font-weight:900;box-shadow:0 0 12px rgba(216,168,60,.28);vertical-align:middle}
+@keyframes rctVerifiedShine{0%,100%{background-position:0% center}50%{background-position:100% center}}
+@media(prefers-reduced-motion:reduce){.general-verified-name{animation:none}}
