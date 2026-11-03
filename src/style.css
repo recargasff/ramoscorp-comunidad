@@ -467,3 +467,6 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible),[role="button"]:foc
 .general-verified-badge{display:inline-flex;align-items:center;justify-content:center;margin-left:5px;padding:2px 7px;border-radius:999px;background:linear-gradient(135deg,#fff1b8,#c18a27 55%,#ffe9a0);color:#2c1b05;font-size:.72em;font-weight:900;box-shadow:0 0 12px rgba(216,168,60,.28);vertical-align:middle}
 @keyframes rctVerifiedShine{0%,100%{background-position:0% center}50%{background-position:100% center}}
 @media(prefers-reduced-motion:reduce){.general-verified-name{animation:none}}
+
+/* Nombre y distintivo General Verified siempre juntos */
+.general-verified-lockup{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;max-width:100%;vertical-align:middle}.general-verified-lockup .general-verified-name{white-space:nowrap}.general-verified-lockup .general-verified-badge{flex:0 0 auto;margin-left:0}
