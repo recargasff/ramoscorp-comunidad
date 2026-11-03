@@ -470,3 +470,9 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible),[role="button"]:foc
 
 /* Nombre y distintivo General Verified siempre juntos */
 .general-verified-lockup{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;max-width:100%;vertical-align:middle}.general-verified-lockup .general-verified-name{white-space:nowrap}.general-verified-lockup .general-verified-badge{flex:0 0 auto;margin-left:0}
+
+/* Insignia dorada para grupos oficiales recomendados. */
+.group-verified-badge{font-size:10px;padding:2px 6px;margin-left:6px;vertical-align:middle;box-shadow:0 0 10px rgba(216,168,60,.3)}
+.groupCard .main b,.dm-contact b{display:inline-flex;align-items:center;flex-wrap:wrap;gap:2px}
+.meta b{min-width:0}
+.meta .general-verified-lockup{max-width:100%;overflow:visible}
